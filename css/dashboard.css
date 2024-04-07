@@ -194,7 +194,7 @@ img:nth-of-type(4){
 }
 
 .card-image img {
-    width: 80%;
+    width: 100%;
     height: auto;
 }
 
