@@ -88,11 +88,13 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Phone Number</th>
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
-                            <th>People</th>
+                            <th>Number of People</th>
                             <th>Comments</th>
+                            <th>Payment</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -258,6 +260,7 @@
             const data = Object.fromEntries(formData.entries());
 
             console.log(data);
+            
         });
 
         function clearForm() {

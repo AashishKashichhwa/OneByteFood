@@ -11,3 +11,4 @@ class Reservation(models.Model):
     num_people = models.IntegerField()
     comments = models.TextField()
     payment_option = models.CharField(max_length=20)
+    status = models.CharField(max_length=50, default='pending')
