@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="/static/css/signin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script>
+        function togglePassword() {
+    var passField = document.getElementById("pass1");
+    var passToggle = document.getElementById("pass-toggle");
+    var passIcon = document.getElementById("password-icon");
+    
+    if (passField.type === "password") {
+        passField.type = "text";
+        passIcon.classList.remove("fa-eye");
+        passIcon.classList.add("fa-eye-slash");
+    } else {
+        passField.type = "password";
+        passIcon.classList.remove("fa-eye-slash");
+        passIcon.classList.add("fa-eye");
+    }
+}
+
+    </script>
+</head>
+<body>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    </div>
+    {% endfor %}
+
+    
+    <div class="background-container">
+        <img src="/static/img/rest.jpg" alt="Background Image">
+    </div>
+
+    <div class="container">
+        <h3>Welcome Back!</h3>
+        <form method="post" action="/signin" class="mb-2">
+            {% csrf_token %}
+
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control-username" id="username" name="username" placeholder="Enter Your Username" Required>
+                
+                <label for="pass1">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control-password" id="pass1" name="pass1" placeholder="Enter Your Password" Required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="pass-toggle" onclick="togglePassword()">
+                            <i id="password-icon" class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log In</button>
+            <h5>Dont have a account ?<br><a href="/templates/authentication/signup.html">Create a new account</a></h5>
+        </form>
+    </div>
+
+</body>
+</html>
