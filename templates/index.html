@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <h1 class="navbar-title">Restaurant Name</h1>
+        </div>
+        <ul class="navbar-nav">
+            <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
+            <li class="navbar-item"><a href="#" class="navbar-link">Menu</a></li>
+            <li class="navbar-item"><a href="#" class="navbar-link">Reservation</a></li>
+            <li class="navbar-item"><a href="#" class="navbar-link">Contact</a></li>
+        </ul>
+    </nav>
+
+
+
+    <main class="content" role="main">
+        <div class="reservation-form-container">
+            <form id="reservation-form" class="reservation-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Reservation Information</legend>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="phone">Phone no.:</label>
+                    <input type="tel" id="phone" name="phone" required>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+
+
+                    <label for="time">Time:</label>
+                    <br>
+                    <br>
+                    <label for="start_time">From: </label>
+                    <input id="start_time" type="time" name="start_timee" value="13:30" />
+                    <label for="end_time">To: </label>
+                    <input id="end_time" type="time" name="end_time" value="13:30" />
+
+
+                    <label for="wela">Table:</label>
+                    <select id="wela" name="wela" required>
+                        <option value="">Select option</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="3">Option 4</option>
+                        <option value="3">Option 5</option>
+                    </select>
+
+                    <label for="people">No. of people:</label>
+                    <input type="number" id="people" name="people" min="1" max="10" required>
+
+                    <label for="needs">Comments:</label>
+                    <textarea id="needs" name="needs" required></textarea>
+
+                    <div class="payment">
+                        <h3>Payment:</h3>
+                        <div class="payment-options">
+
+                            <label>
+                                <input type="radio" name="payment-option" value="Esewa" required>
+                                <img src="Esewa_logo.webp" alt="Esewa">
+                            </label>
+                            <label>
+                                <input type="radio" name="payment-option" value="fonepay" required>
+                                fonepay
+                            </label>
+                            <label>
+                                <input type="radio" name="payment-option" value="Khalti" required>
+                                Khalti
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="reserve">Reserve</button>
+                    <button type="reset">Reset</button>
+                </fieldset>
+                {% csrf_token %}
+            </form>
+        </div>
+
+        <div class="history-container">
+            <section class="history" id="history">
+                <h2 class="section-title">History</h2>
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>People</th>
+                            <th>Comments</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add rows for each reservation history entry -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+
+
+
+    <footer class="footer">
+        <p>&copy; Restaurant Name. All Rights Reserved.</p>
+    </footer>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Garamond', serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F1F4F6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #32657C;
+            color: #FFF;
+            padding: 1rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-title {
+            margin: 0;
+            color: #FFF;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-item {
+            padding: 0 1rem;
+        }
+
+        .navbar-link {
+            color: #FFF;
+            text-decoration: none;
+        }
+
+        .content {
+            border: 1px solid #E4E4E4;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            margin-top: 50px;
+        }
+
+        .reservation-form {
+            grid-column: 1 / 3;
+        }
+
+        label {
+            text-align: right;
+            padding-right: 10px;
+            font-size: 18px;
+            color: #32657C;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #E4E4E4;
+            font-size: 18px;
+            color: #32657C;
+            margin-bottom: 10p
+        }
+
+        /* Add the following styles to your CSS file */
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .payment-options label {
+            margin-right: 20px;
+            margin-bottom: 5px;
+        }
+
+        .payment-options label img {
+            height: 30px;
+            width: auto;
+            margin-right: 1rem;
+        }
+
+        .payment-options input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .history {
+            margin-top: 50px;
+            padding-bottom: 200px;
+            border: 1px solid #1e1d1d;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .history-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #1e1d1d;
+        }
+
+        .history-table th,
+        .history-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background-color: #32657C;
+            color: #FFF;
+        }
+    </style>
+
+    <script>
+        const form = document.getElementById('reservation-form');
+
+        form.addEventListener('reserve', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log(data);
+
+            // You can add code here to submit the form data to a server or perform other actions.
+        });
+
+        function clearForm() {
+            document.getElementById('reservation-form').reset();
+        }
+    </script>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+</body>
+
+</html>
