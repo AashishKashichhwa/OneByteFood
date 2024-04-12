@@ -22,15 +22,7 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Menu</a></li>
                     <li><a href="#">Events</a></li>
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropbtn" style="color: #cf8145;">Reservations <i class="fas fa-caret-down"></i></a>
-                        <div class="dropdown-content">
-                            <a href="#" >Main Restaurant</a>
-                            <!--<a href="#" >Private Dining</a>-->
-                        </div>
-                        
-                    </li>
+                    <li><a href="#">Reservations</a></li>
                     <li><a href="#">Gallery</a></li>
                     <li><a href="#" class="login-button" style="color: #ffffff;">LOGIN</a></li> 
                 </ul>
@@ -40,7 +32,7 @@
 
     <!--Slider-->
     <div class="empty">
-            <img src="./Images/1.png">
+            <img src="./Images/1.jpg">
             <img src="./Images/21.jpg">
             <img src="./Images/4.jpg">
             <img src="./Images/2 (2).jpg">
@@ -48,6 +40,26 @@
 </div>
 <div class="book-table">
     <a href="Reservation.html" class="book-btn">Reserve Now</a>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <div class="content">
+        <div class="close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="IMG">
+            <img src="./Images/announce.png" style="width: 50%;">
+        </div>
+        <div class="con">
+            <div>
+                <h3>Offer Offer Offer!!</h3>
+                <h2>30% <SPAN>OFF</SPAN></h2>
+                <p>Book your reservation and grab the<br> offers for this New Year 2081!</p>
+                <a href="#">Grab the deal </a>
+          </div>
+        </div> 
+    </div>
 </div>
 
 <div class="card">
@@ -147,6 +159,7 @@
     </div>
     <p class="copyright">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
 </footer>
+<script src="./js/dashboard.js"></script>
 
 </body>
 </html>
