@@ -1,12 +1,103 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+
 }
 
-body{
-    background-color: #f3f3f3;
-    font-family: 'Montserrat';
+nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 800; 
+    font-weight: 600;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 60px;
+}
+
+.logo img {
+    width: 200px; 
+    height: auto; 
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px; 
+    background: linear-gradient(to right, #2c5870, #669bb7); /* Linear gradient background */
+    color: #fff; 
+    border: none;
+    border-radius: 20px; 
+    text-decoration: none; 
+    cursor: pointer;
+    margin-left: 180px;
+}
+
+.login-button:active {
+    transform: translateY(-3px); 
+    }
+
+
+.menu ul {
+    list-style-type: none;
+    text-align: right;
+}
+
+.menu ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.menu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.3rem;
+}
+
+.menu ul li a:hover {
+    color: #CF8145;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #e1dfdf;
+    min-width: 190px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+.box img {
+    width: 180px;
+    margin-bottom: 7px;
 }
 .heading{
     background-color: #CF8145;
@@ -28,7 +119,7 @@ body{
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 50px 0;  
+    
 }
 
 .food-items{
@@ -60,14 +151,19 @@ h5{
     grid-column: 1/-1;
     text-align: center;
 }
-.details{
-    text-align: left;
-    color:#1F2544;
-    padding-top: 0 8px;
+
+.details2 h1{
+    color: #32657C;
+    font-size: 2rem;
+    margin-top: 15px;
+    
+
 }
 .details2 h5{
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.3rem;
+    margin-top: 10px;
+   
 }
 .price{
     text-align: center;
@@ -84,26 +180,113 @@ button{
     text-align: center;
     background-color:#CF8145;
     border: none;
-    color: #ffffff;
-    font-size: 16px;
+    color: #19323d;
+    font-size: 20px;
     font-weight: 600;
-    border-radius: 5px;
-    width:180px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    width:380px;
+    margin-top: 10px;
     padding: 15px;
 }
-button:hover{
+/* button:hover{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     transform: translate(0px, -8px);
+} */
+button:hover {
+    background-color: #19323d;
+    color: #CF8145; 
+    outline: 2px solid transparent;
 }
-@media(max-width:1000px){
-    .main{
-        width: 45%;
-    }
+
+
+/*Footer*/
+.containerfooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 60px;
 }
-@media(max-width:750px){
-    .main{
-        width: 100%;
-    }
+footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #234555;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.footer-section {
+    flex: 1;
+    margin-right: 5px;
+    margin-bottom: 0px; 
+}
+
+.footer-section h2 {
+    color: #EEC343;
+    text-align: left;
+    margin-bottom: 10px; 
+}
+
+.footer-section p {
+    text-align: justify;
+    margin-bottom: 20px; 
+}
+
+.logo-section {
+    margin-bottom: 20px; 
+    margin-left: -60px;
+}
+
+.logo-section img {
+    width: 180px;
+    margin-bottom: 7px;
+}
+
+.social-links {
+    margin-bottom: 20px; 
+}
+
+.social-links a {
+    color: white;
+    margin-right: 10px; 
+    padding: 5px;
+    font-size: 20px;
+}
+
+.social-links a:hover {
+    color: #aaa;
+}
+.contact-section {
+    flex: 1; 
+    text-align: right; 
+    margin-bottom: 20px; 
+}
+
+.contact-section h2 {
+    color: #EEC343;
+    text-align: right; 
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    text-align: right; 
+    margin-bottom: 10px; 
+}
+.payment-partners {
+    display: flex; 
+    justify-content: flex-end; 
+}
+
+.payment-partners img {
+    width: 80px; 
+    height: auto;
+    margin-right: 10px; 
+}
+
+.copyright{
+ 
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
 }
