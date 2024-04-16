@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Reservation Status</title>
+    <!-- Added Google Fonts link -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif; /* Changed font */
+        }
+        form {
+            width: 80%;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #EEC343;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Reservation Status</h1>
+    <form method="POST" action="{% url 'update_reservation' reservation.id %}">
+        {% csrf_token %}
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="pending" {% if reservation.status == 'pending' %} selected {% endif %}>Pending</option>
+            <option value="confirmed" {% if reservation.status == 'confirmed' %} selected {% endif %}>Confirmed</option>
+            <option value="cancelled" {% if reservation.status == 'cancelled' %} selected {% endif %}>Cancelled</option>
+            <option value="completed" {% if reservation.status == 'completed' %} selected {% endif %}>Completed</option>
+        </select><br>
+        <button type="submit">Save Status</button>
+    </form>
+</body>
+</html>
