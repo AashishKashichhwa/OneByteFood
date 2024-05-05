@@ -19,10 +19,14 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def reserve_table(request):
-    reservation_status = None  # Initialize reservation status message
+from django.shortcuts import render, HttpResponseRedirect
+from django.contrib import messages
+from .models import Reservation
 
+def reservationDetails(request):
     if request.method == 'POST':
+        # Process form submission and save reservation
+        reservation_status = None  # Initialize reservation status message
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         date = request.POST.get('date')
@@ -33,7 +37,6 @@ def reserve_table(request):
         payment_option = request.POST.get('payment-option')
         status = 'pending'
 
-
         reservation = Reservation(
             name=name,
             phone=phone,
@@ -43,31 +46,29 @@ def reserve_table(request):
             num_people=num_people,
             comments=comments,
             payment_option=payment_option,
-            status = status,
+            status=status,
         )
         reservation.save()
 
-        messages.success(request, 'Reservation is requested sucessfully. Wait admin to verify the reservation status')
+        messages.success(request, 'Reservation is requested successfully. Wait admin to verify the reservation status')
         reservation_status = 'Reservation saved successfully.'  # Update reservation status message
 
         # Redirect to the same page after form submission
-        return HttpResponseRedirect('reservation_history')
-
-    return render(request, 'reservation.html')
-
-
-# Add a new function to retrieve reservation data# views.py
-
-def reservation_history(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')  # Get the name from the POST request
-        reservations_data = Reservation.objects.filter(name=name)  # Filter reservations by name
+        return HttpResponseRedirect('/reservation_details/?name=' + name + '&phone=' + phone)
     else:
-        # If no POST data is sent, show all reservations
-        reservations_data = Reservation.objects.all()
+        # If it's a GET request or no POST data is sent, show reservations for the user
+        name = request.GET.get('name', '')  # Get name from GET request, with a default value of empty string
+        phone = request.GET.get('phone', '')  # Get phone from GET request, with a default value of empty string
 
-    # Pass the reservations data to the template
-    return render(request, 'reservation.html', {'reservations_data': reservations_data})
+        if name and phone:
+            # Filter reservations by name and phone number if both are provided
+            reservations_data = Reservation.objects.filter(name=name, phone=phone)
+        else:
+            # If either name or phone number is missing, show all reservations
+            reservations_data = Reservation.objects.all()
+
+        # Pass the reservations data to the template
+        return render(request, 'reservation.html', {'reservations_data': reservations_data, 'name': name, 'phone': phone})
 
 
 def menu_redirect(request):

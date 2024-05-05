@@ -22,4 +22,3 @@ window.onload = function() {
 
     closeButton.addEventListener('click', hidePopup);
 }
-

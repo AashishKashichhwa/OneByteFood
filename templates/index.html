@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OneByte Foods</title>
-    <link rel="stylesheet" href="static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,22 +15,15 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <img src="/static/Images/Logo.png" alt="OneByte Foods Logo">
+                <!-- <img src="/static/Images/Logo.png" alt="OneByte Foods Logo"> -->
+                <a href=""><img src="/static/Images/Logo.png" alt="OneByte Foods Logo"></a>
             </div>
             <div class="menu">
                 <ul>
                     <li><a href="">Home</a></li>
                     <li><a href="menu">Menu</a></li>
                     <li><a href="events">Events</a></li>
-                    <li><a href="reservation">Reservation</a></li>
-                    
-                    <!--<li class="dropdown">
-                        <a href="#" class="dropbtn" style="color: #cf8145;">Reservations <i class="fas fa-caret-down"></i></a>
-                        <div class="dropdown-content">
-                            <a href="#" >Main Restaurant</a>
-                            <a href="#" >Private Dining</a>
-                        </div>
-                    </li>-->
+                    <li><a href="reservation">Reservations</a></li>
                     <li><a href="gallery">Gallery</a></li>
                     <li><a href="authentication/signin" class="login-button" style="color: #ffffff;">LOGIN</a></li> 
                 </ul>
@@ -38,7 +31,19 @@
         </div>
     </nav>
 
-    <div class="overlay" id="overlay"></div>
+    <!--Slider-->
+    <div class="empty">
+            <img src="/static/Images/1.jpg">
+            <img src="/static/Images/21.jpg">
+            <img src="/static/Images/4.jpg">
+            <img src="/static/Images/2 (2).jpg">
+    </div>
+</div>
+<div class="book-table">
+    <a href="reservation" class="book-btn">Reserve Now</a>
+</div>
+
+<div class="overlay" id="overlay"></div>
 <div class="popup" id="popup">
     <div class="content">
         <div class="close">
@@ -52,22 +57,10 @@
                 <h3>Offer Offer Offer!!</h3>
                 <h2>30% <SPAN>OFF</SPAN></h2>
                 <p>Book your reservation and grab the<br> offers for this New Year 2081!</p>
-                <a href="#">Grab the deal </a>
+                <a href="events">Grab the deal </a>
           </div>
         </div> 
     </div>
-</div>
-
-    <!--Slider-->
-    <div class="empty">
-            <img src="/static/Images/1.png">
-            <img src="/static/Images/21.jpg">
-            <img src="/static/Images/4.jpg">
-            <img src="/static/Images/2 (2).jpg">
-    </div>
-</div>
-<div class="book-table">
-    <a href="reservation" class="book-btn">Reserve Now</a>
 </div>
 
 <div class="card">
@@ -82,7 +75,7 @@
     </div>
 </div>
 
-<section class="chef" style="background-image: url('bg1.png'); background-size: cover;  color: white; padding: 20px; text-align: center; width: 100%; height: 150px"></section>
+<section class="chef" style="background-image: url('/static/Images/bg1.png'); background-size: cover;  color: white; padding: 20px; text-align: center; width: 100%; height: 150px"></section>
         <h2 class="heading1">Chef's Message</h2>
         <p class="paragraph">Welcome to our restaurant! We strive to provide you with the most delightful culinary experience. Our team of chefs puts their heart and soul into every dish, ensuring each bite is filled with flavor and satisfaction.</p>
 </section>
@@ -134,11 +127,11 @@
     </div>
     </section>
 
-<footer style="background-image: url('footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
+<footer style="background-image: url('/static/Images/Footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
     <div class="containerfooter">
         <div class="footer-section">
             <div class="logo-section">
-                <img src="/static/Images/Logo.png" alt="OneByte Foods Logo">
+                <img src="/static/images/logo.png" alt="OneByte Foods Logo">
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
@@ -167,11 +160,7 @@
     </div>
     <p class="copyright">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
 </footer>
-
-<style>
-   
-</style>
-
 <script src="/static/js/dashboard.js"></script>
+
 </body>
 </html>

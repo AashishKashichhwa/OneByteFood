@@ -83,11 +83,10 @@ def activate(request,uidb64,token):
     else:
         return render(request,'activation_failed.html')
 
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Signup_data
-
-from django.contrib import messages
 
 def signin(request):
     if request.method == 'POST':
@@ -108,8 +107,8 @@ def signin(request):
         # Check if the password matches
         if user_data.password != password:
             messages.error(request, 'Invalid username or password')
-            return render(request, 'authentication/signin.html', {'username': username})  # Pass username back to form
-        
+            return render(request, 'authentication/signin.html')
+
         # Authentication successful, proceed with login
         # Check if the user is an admin or regular user
         if user_data.admin:
@@ -120,8 +119,6 @@ def signin(request):
             return redirect('user_dashboard')
     
     return render(request, 'authentication/signin.html')
-
-
 
 
 
