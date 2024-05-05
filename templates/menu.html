@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneByte Foods</title>
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+     <!--Nav Bar-->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img src="/static/Images/Logo.png" alt="OneByte Foods Logo">
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'menu_redirect' %}">Menu</a></li>
+                    <li><a href="{% url 'events_redirect' %}">Events</a></li>
+                    <li><a href="{% url 'reservation' %}">Reservations</a></li>
+                    <li><a href="{% url 'gallery_redirect' %}">Gallery</a></li>
+                    
+                    <!-- <li class="dropdown"> 
+                        <a href="#" class="dropbtn" style="color: #cf8145;">Reservations <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#" >Main Restaurant</a>
+                            <a href="#" >Private Dining</a>
+                        </div> -->
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu">
+        <div class="food-items">
+            <img src="/static/Images/menu_images/Smoked-Hamburgers-Feature.png" style="width: 52%; height: 0%;">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Smoked Hamburger</h1>
+                    <h5 class="price">Rs 465</h5>
+                </div>
+                <p>Burger with Smokey Grilled Chicken Patty  </p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/honey-garlic-chicken.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Honey Garlic Chicken </h1>
+                    <h5 class="price">Rs 575</h5>
+                </div>
+                <p>Chicken tossed in honey and garlic sauce</p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/chicken-pizza.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Hawaiian Pizza </h1>
+                    <h5 class="price">Rs 900</h5>
+                </div>
+                <p>Pizza topped with vegetables and pineapple </p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/spicy.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Spicy Hot Chicken Wings </h1>
+                    <h5 class="price">Rs 750</h5>
+                </div>
+                <p>Chicken wings tossed in hot and spicy sauce</p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/garlic-chicken-penne.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Creamy Garlic Penne Pasta</h1>
+                    <h5 class="price">Rs 350</h5>
+                </div>
+                <p>Penne pasta with creamy garlic cheese sauce </p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/Chicken-meatballs-and-spaghetti-3.jpg" style="width: 47%; height: 0%;">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Chicken Meatball Spaghetti </h1>
+                    <h5 class="price">Rs 450</h5>
+                </div>
+                <p>Spaghetti with red sauce and chicken meat balls  </p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/momo.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Chicken MOMO</h1>
+                    <h5 class="price">Rs 250</h5>
+                </div>
+                <p>Dumplings filled with juicy chicken stuffings</p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/fries.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Chicken Cheesy Fries</h1>
+                    <h5 class="price">Rs 300</h5>
+                </div>
+                <p>French fries loaded with chicken and cheese </p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+
+        <div class="food-items">
+            <img src="/static/Images/menu_images/garlic.jpg">
+            <div clss="details">
+                <div class="details2">
+                    <h1>Garlic Bread</h1>
+                    <h5 class="price">Rs 200</h5>
+                </div>
+                <p>Bread toasted in garlic butter</p>
+                <button>ADD ITEM</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer style="background-image: url('footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
+        <div class="containerfooter">
+            <div class="footer-section">
+                <div class="logo-section">
+                    <img src="/static/Images/logo.png" alt="OneByte Foods Logo">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h2>About Us</h2>
+                <p>
+                    At OneByte Foods, we understand the importance of creating memorable moments around the dining table. That's why we've embarked on a journey to revolutionize the way you experience dining with our cutting-edge dine-in booking system and efficient management tools.</p>
+                
+            </div>
+            <div class="footer-section contact-section">
+                <h2>Contact Information</h2>
+                <p>123 Street Name, City, Country</p>
+                <p>Phone: +9867976546</p>
+                <h2>Payment Partners</h2>
+                <div class="payment-partners">
+                    <a href="https://esewa.com.np"><img src="/static/Images/esewa.png" alt="eSewa"></a>
+                    <a href="https://khalti.com"><img src="/static/Images/khalti.png" alt="Khalti"></a>
+                </div>
+                
+            </div>
+          
+        </div>
+        <p style="text-align: center; margin-top: 20px;">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

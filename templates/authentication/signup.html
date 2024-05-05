@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .error-message {
+            color: white;
+        }
+    </style>
+    <script>
+        function togglePassword(inputId, iconId) {
+            var passField = document.getElementById(inputId);
+            var passToggle = document.getElementById(iconId);
+            if (passField.type === "password") {
+                passField.type = "text";
+                passToggle.classList.remove('fa-eye');
+                passToggle.classList.add('fa-eye-slash');
+                passToggle.setAttribute('title', 'Hide Password');
+            } else {
+                passField.type = "password";
+                passToggle.classList.remove('fa-eye-slash');
+                passToggle.classList.add('fa-eye');
+                passToggle.setAttribute('title', 'Show Password');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="all">
+
+        <div class="background-container">
+            <img src="/static/img/rest.jpg" alt="Background Image">
+        </div>
+            <div class="container">
+                <h3>Create your account!</h3>
+                <form method="post" action="/signup">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control-username" id="username" name="username" placeholder="Create A Username" required>
+                        
+                        <label for="fname">First Name</label>
+                        <input type="text" class="form-control-first" id="fname" name="fname" placeholder="Enter Your First Name" required>
+                
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="form-control-last" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+                
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control-email" id="email" name="email" placeholder="Enter Your Email Address" required>
+                
+                        <label for="pass1">Password</label>
+                        <div class="input-group">
+                            
+                            <input type="password" class="form-control-password" id="pass1" name="pass1" placeholder="Create Your Password" required>
+                            <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"  onclick="togglePassword('pass1', 'password-icon1')" title="Show Password">
+                                <i id="password-icon1" class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        </div>
+        
+                        <label for="pass2">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control-password" id="pass2" name="pass2" placeholder="Confirm Your Password" required>
+                            <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"  onclick="togglePassword('pass2', 'password-icon2')" title="Show Password">
+                                <i id="password-icon2" class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                
+
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <a href="{% url 'signin' %}">Already have an account?</a>
+
+            </form>
+        </div>
+    
+    </div>
+        
+</body>
+</html>

@@ -1,0 +1,109 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f3f3f3;
+    font-family: 'Montserrat';
+}
+.heading{
+    background-color: #CF8145;
+    color:#ffffff;
+    margin-bottom: 30px;
+    padding: 30px 0;
+    grid-column: 1/-1;
+    text-align: center;
+}
+.heading h1{
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+}
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;  
+}
+
+.food-items{
+    width: 30%;
+    margin: 15px;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    padding-top: 10px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: .4s;
+    background: #f2f2f2;
+}
+.food-items:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transform: translate(0px, -8px);
+}
+.food-items img{
+    width: 200px;
+    height: 200px;
+    align-items: center;
+    margin: 0 auto;
+    display: block;
+}
+
+h5{
+    grid-column: 1/-1;
+    text-align: center;
+}
+.details{
+    text-align: left;
+    color:#1F2544;
+    padding-top: 0 8px;
+}
+.details2 h5{
+    font-weight: 600;
+    font-size: 20px;
+}
+.price{
+    text-align: center;
+}
+.details p{
+    margin: 20px;
+    color: #6f6f6f;
+    font-size: 15px;
+    line-height: 28px;
+    font-weight: 400;
+    align-self: stretch;
+}
+button{
+    text-align: center;
+    background-color:#CF8145;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    width:180px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+button:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transform: translate(0px, -8px);
+}
+@media(max-width:1000px){
+    .main{
+        width: 45%;
+    }
+}
+@media(max-width:750px){
+    .main{
+        width: 100%;
+    }
+}
