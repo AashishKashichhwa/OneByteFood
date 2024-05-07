@@ -32,7 +32,7 @@ def reserve_table(request):
         comments = request.POST.get('needs')
         payment_option = request.POST.get('payment-option')
         status = 'pending'
-
+#Adding Comments
 
         reservation = Reservation(
             name=name,
