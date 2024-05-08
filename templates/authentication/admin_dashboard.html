@@ -141,8 +141,8 @@
                                     <td>{{ reservation.payment_option }}</td>
                                     <td>{{ reservation.status }}</td>
                                     <td>
-                                        <button class="edit-btn"><a href="/edit/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
-                                        <button class="delete-btn"><a href="/delete/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
+                                        <button class="edit-btn"><a href="/edit_admin/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
+                                        <button class="delete-btn"><a href="/delete_admin/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
                                     </td>
                                 </tr>
                             {% endfor %}

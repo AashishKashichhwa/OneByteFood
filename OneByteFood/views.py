@@ -90,6 +90,10 @@ def edit_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
     # Handle edit logic here, for example, render an edit form
     return render(request, 'edit_reservation.html', {'reservation': reservation})
+def edit_reservation_user(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    # Handle edit logic here, for example, render an edit form
+    return render(request, 'edit_res_user.html', {'reservation': reservation})
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reservation
@@ -98,6 +102,18 @@ def delete_reservation(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
     reservation.delete()
     return redirect('admin_dashboard')
+def delete_reservation_user(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    
+    # Retrieve name and phone from the request.GET dictionary
+    name = request.GET.get('name', '')
+    phone = request.GET.get('phone', '')
+
+    reservation.delete()
+    
+    # Redirect to the reservation details page with name and phone parameters
+    return redirect('/reservation_details/?name=' + name + '&phone=' + phone)
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reservation
 from django.contrib import messages
@@ -115,5 +131,15 @@ def update_reservation(request, reservation_id):
         reservation.status = new_status
         reservation.save()
         return redirect('admin_dashboard')  # Redirect to the admin dashboard after updating status
+
+    return render(request, 'edit_reservation_status.html', {'reservation': reservation})
+def update_reservation_user(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        reservation.status = new_status
+        reservation.save()
+        return redirect('reservation')  # Redirect to the admin dashboard after updating status
 
     return render(request, 'edit_reservation_status.html', {'reservation': reservation})
