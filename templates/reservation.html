@@ -106,6 +106,7 @@
                             <th>Comments</th>
                             <th>Payment</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,6 +122,10 @@
                             <td>{{ reservation.comments }}</td>
                             <td>{{ reservation.payment_option }}</td>
                             <td>{{ reservation.status }}</td>
+                            <td>
+                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
+                                <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

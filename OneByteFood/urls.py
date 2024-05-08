@@ -81,7 +81,10 @@ urlpatterns = [
     path('user_dashboard/reservation/', onebytefood_views.reservation, name='user_reservation'),
     path('user_dashboard/reservation_details/', onebytefood_views.reservationDetails, name='user_reservationDetails'),
     path('user_dashboard/gallery/', onebytefood_views.gallery_redirect, name='user_gallery_redirect'),
-    path('edit/<int:reservation_id>/', onebytefood_views.edit_reservation, name='edit_reservation'),
-    path('update/<int:reservation_id>/', onebytefood_views.update_reservation, name='update_reservation'),
-    path('delete/<int:reservation_id>/', onebytefood_views.delete_reservation, name='delete_reservation'),
+    path('edit_admin/<int:reservation_id>/', onebytefood_views.edit_reservation, name='edit_reservation'),
+    path('update_admin/<int:reservation_id>/', onebytefood_views.update_reservation, name='update_reservation'),
+    path('delete_admin/<int:reservation_id>/', onebytefood_views.delete_reservation, name='delete_reservation'),
+    path('edit_reservation_user/<int:reservation_id>/', onebytefood_views.edit_reservation_user, name='edit_reservation_user'),
+    path('update_user/<int:reservation_id>/', onebytefood_views.update_reservation_user, name='update_reservation_user'),
+    path('delete_reservation_user/<int:reservation_id>/', onebytefood_views.delete_reservation_user, name='delete_reservation_user'),
 ]

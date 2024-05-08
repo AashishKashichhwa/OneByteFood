@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Reservation Status</title>
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="h1">Edit Reservation Status</h1>
+    <form method="POST" action="{% url 'update_reservation_user' reservation.id %}">
+        {% csrf_token %}
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option value="pending" {% if reservation.status == 'pending' %} selected {% endif %}>Pending</option>
+            <option value="confirmed" {% if reservation.status == 'confirmed' %} selected {% endif %}>Confirmed</option>
+            <option value="cancelled" {% if reservation.status == 'cancelled' %} selected {% endif %}>Cancelled</option>
+            <option value="completed" {% if reservation.status == 'reserved' %} selected {% endif %}>Reserved</option>
+        </select><br>
+        <button type="submit">SAVE STATUS</button>
+    </form>
+</body>
+</html>
