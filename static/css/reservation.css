@@ -1,0 +1,267 @@
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+
+    nav {
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 800;
+        font-weight: 600;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 60px;
+    }
+
+    .logo img {
+        width: 200px;
+        height: auto;
+    }
+
+    .login-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(to right, #2c5870, #669bb7);
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-left: 150px;
+    }
+
+    .login-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 6px 3px rgba(30, 62, 81, 0.8)
+    }
+
+    .menu ul {
+        list-style-type: none;
+        text-align: right;
+    }
+
+    .menu ul li {
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .menu ul li a {
+        color: #333;
+        text-decoration: none;
+        font-size: 1.3rem;
+    }
+
+    .menu ul li a:hover {
+        color: #cf8145;
+    }
+
+    .content {
+        border: solid #E4E4E4;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        /* display: grid; */
+        align-content: space-between;
+        display: flex;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-bottom: 50px;
+        /* grid-template-columns: repeat(2, 1fr); */
+        /* grid-gap: 10px; */
+
+    }
+
+    .history {
+        width: calc(100% - 20px);
+        /* Adjust the width as needed */
+        height: 70vh;
+        /* Adjust the height as needed */
+        margin-top: 40px;
+        border: 1px solid #1e1d1d;
+        overflow: auto;
+        /* Add overflow auto to enable scrolling if needed */
+    }
+
+    .reservation-form {
+        grid-column: 1 /1;
+    }
+.reservation-form-container{
+    /* margin-left: 50px; */
+    margin-right: 30px;
+    margin-top: 40px;
+
+    width: 50%;
+}
+    label {
+        text-align: right;
+        padding-right: 10px;
+        font-size: 18px;
+        color: #32657C;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #E4E4E4;
+        font-size: 18px;
+        color: #32657C;
+        margin-bottom: 10p
+    }
+
+    /* Add the following styles to your CSS file */
+    .payment-options {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 10px 0;
+    }
+
+    .payment-options label {
+        margin-right: 20px;
+        margin-bottom: 5px;
+    }
+
+    .payment-options label img {
+        height: 30px;
+        width: auto;
+        margin-right: 1rem;
+    }
+
+    .payment-options input[type="radio"] {
+        margin-right: 5px;
+    }
+
+    .history {
+        margin-top: 50px;
+        padding-bottom: 200px;
+        border: 1px solid #1e1d1d;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .history-table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #1e1d1d;
+    }
+
+    .history-table th,
+    .history-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .history-table th {
+        background-color: #32657C;
+        color: #FFF;
+    }
+
+    /*Footer*/
+    .containerfooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 60px;
+    }
+
+    footer {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #234555;
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .footer-section {
+        flex: 1;
+        margin-right: 5px;
+        margin-bottom: 0px;
+    }
+
+    .footer-section h2 {
+        color: #EEC343;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .footer-section p {
+        text-align: justify;
+        margin-bottom: 20px;
+    }
+
+    .logo-section {
+        margin-bottom: 20px;
+        margin-left: -60px;
+    }
+
+    .logo-section img {
+        width: 180px;
+        margin-bottom: 7px;
+    }
+
+    .social-links {
+        margin-bottom: 20px;
+    }
+
+    .social-links a {
+        color: white;
+        margin-right: 10px;
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .social-links a:hover {
+        color: #aaa;
+    }
+
+    .contact-section {
+        flex: 1;
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .contact-section h2 {
+        color: #EEC343;
+        text-align: right;
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+    .contact-section p {
+        text-align: right;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .payment-partners {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .payment-partners img {
+        width: 80px;
+        height: auto;
+        margin-right: 6px;
+    }
+
+    .copyright {
+        width: 100%;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+    }
