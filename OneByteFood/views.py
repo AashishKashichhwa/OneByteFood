@@ -143,3 +143,28 @@ def update_reservation_user(request, reservation_id):
         return redirect('reservation')  # Redirect to the admin dashboard after updating status
 
     return render(request, 'edit_reservation_status.html', {'reservation': reservation})
+
+
+def user_reservation_history_redirect(request):
+    # Redirect to the user_reservation_history.html page
+    return render(request, 'user_reservation_history.html')
+
+
+def show_user_reservation_history(request):
+    if request.method == 'GET':
+        # If it's a GET request, extract name and phone from the query parameters
+        name = request.GET.get('name', '')  
+        phone = request.GET.get('phone', '')  
+        
+        if name and phone:
+            # Filter reservations by name and phone number if both are provided
+            reservations_data = Reservation.objects.filter(name=name, phone=phone)
+        else:
+            # If either name or phone number is missing, show all reservations
+            reservations_data = Reservation.objects.all()
+
+        # Pass the reservations data to the template along with name and phone
+        return render(request, 'user_reservation_history.html', {'reservations_data': reservations_data, 'name': name, 'phone': phone})
+    else:
+        # If it's not a GET request, redirect to the same page
+        return HttpResponseRedirect('/user_reservation_history/')
