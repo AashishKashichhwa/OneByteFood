@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Reservation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/static/css/reservation.css">
 </head>
 </head>
 
 <body>
-
+    <style>
+        
+    </style>
     <!-- Navigation -->
     <nav>
         <div class="container">
@@ -37,7 +40,7 @@
             <form method="post" action="{% url 'reservationDetails' %}" id="reservationForm"
                 class="reservationForm-form">
                 {% csrf_token %}
-                <fieldset>
+                <fieldset class="fieldset">
                     <legend>Reservation Information</legend>
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -82,8 +85,8 @@
                         </div>
                     </div>
 
-                    <a href="reservation_details"><button type="reserve">Reserve</button></a>
-                    <button type="reset">Reset</button>
+                    <a href="reservation_details"><button type="reserve" class="reserve-btn">Reserve</button></a>
+                    <button type="reset" class="reset-btn">Reset</button>
                 </fieldset>
                 {% csrf_token %}
             </form>
@@ -127,8 +130,10 @@
                             <td>{{ reservation.payment_option }}</td>
                             <td>{{ reservation.status }}</td>
                             <td>
-                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
-                                <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
+                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}"
+                                        style="text-decoration: none; color: inherit;">EDIT</a></button>
+                                <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}"
+                                        style="text-decoration: none; color: inherit;">DELETE</a></button>
                             </td>
                         </tr>
                         {% endfor %}
