@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Reservation(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -11,7 +9,7 @@ class Reservation(models.Model):
     end_time = models.TimeField()
     num_people = models.IntegerField()
     comments = models.TextField()
-    payment_option = models.CharField(max_length=20)
+    payment_made = models.BooleanField(default=False)
     status = models.CharField(max_length=50, default='pending')
 
 class FoodItem(models.Model):

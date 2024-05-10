@@ -13,7 +13,7 @@
 
 <body>
     <style>
-        
+
     </style>
     <!-- Navigation -->
     <nav>
@@ -68,19 +68,10 @@
                     <textarea id="needs" name="needs" required></textarea>
 
                     <div class="payment">
-                        <h3>Payment:</h3>
+                        <label for="payment">Payment Made:</label>
                         <div class="payment-options">
                             <label>
-                                <input type="radio" name="payment-option" value="Esewa" required>
-                                Cash
-                            </label>
-                            <label>
-                                <input type="radio" name="payment-option" value="fonepay" required>
-                                Esewa
-                            </label>
-                            <label>
-                                <input type="radio" name="payment-option" value="Khalti" required>
-                                Khalti
+                                <input type="checkbox" id="payment_made" name="payment_made">
                             </label>
                         </div>
                     </div>
@@ -93,57 +84,51 @@
         </div>
 
         <!-- Reservation History -->
-        <div class="history-container">
-            <section class="history" id="history">
-                <h2 class="section-title">Reservation History</h2>
-                <p>Look your previous reservations from <a href="user_reservation_history">here. </a></p>
-
-                <!-- Table for reservation history -->
-                {% if reservations_data %}
-                <table class="history-table">
-                    <!-- Table headers -->
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone Number</th>
-                            <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Number of People</th>
-                            <th>Comments</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Add rows for each reservation -->
-                        {% for reservation in reservations_data %}
-                        <tr>
-                            <td>{{ reservation.name }}</td>
-                            <td>{{ reservation.phone }}</td>
-                            <td>{{ reservation.date }}</td>
-                            <td>{{ reservation.start_time }}</td>
-                            <td>{{ reservation.end_time }}</td>
-                            <td>{{ reservation.num_people }}</td>
-                            <td>{{ reservation.comments }}</td>
-                            <td>{{ reservation.payment_option }}</td>
-                            <td>{{ reservation.status }}</td>
-                            <td>
-                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}"
-                                        style="text-decoration: none; color: inherit;">EDIT</a></button>
-                                <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}"
-                                        style="text-decoration: none; color: inherit;">DELETE</a></button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <h4>No previous reservations.</h4>
-                {% endif %}
-            </section>
-        </div>
+<div class="history-container">
+    <section class="history" id="history">
+        <h2 class="section-title">Reservation History</h2>
+        {% if reservations_data %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Number of People</th>
+                    <th>Comments</th>
+                    <th>Payment Made</th> <!-- Updated column header -->
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add rows for each reservation -->
+                {% for reservation in reservations_data %}
+                <tr>
+                    <td>{{ reservation.name }}</td>
+                    <td>{{ reservation.phone }}</td>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.start_time }}</td>
+                    <td>{{ reservation.end_time }}</td>
+                    <td>{{ reservation.num_people }}</td>
+                    <td>{{ reservation.comments }}</td>
+                    <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td> <!-- Corrected syntax -->
+                    <td>{{ reservation.status }}</td>
+                    <td>
+                        <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
+                        <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h4>No previous reservations.</h4>
+        {% endif %}
+    </section>
+</div>
     </main>
 
     <!-- Footer -->
