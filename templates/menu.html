@@ -12,6 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="addedToCartMessage" class="added-to-cart-message">
+        <p>Item added to cart!</p>
+    </div>
+
      <!--Nav Bar-->
     <nav>
         <div class="container">
@@ -25,30 +29,40 @@
                     <li><a href="{% url 'events_redirect' %}">Events</a></li>
                     <li><a href="{% url 'reservation' %}">Reservations</a></li>
                     <li><a href="{% url 'gallery_redirect' %}">Gallery</a></li>
+                    <li><a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
                     
                     <!-- <li class="dropdown"> 
                         <a href="#" class="dropbtn" style="color: #cf8145;">Reservations <i class="fas fa-caret-down"></i></a>
                         <div class="dropdown-content">
                             <a href="#" >Main Restaurant</a>
                             <a href="#" >Private Dining</a>
-                        </div> -->
+                        </div> 
                         
-                    </li>
+                    </li>-->
                 </ul>
             </div>
+            
         </div>
     </nav>
 
+    
+    
+
     <div class="menu">
         <div class="food-items">
-            <img src="/static/Images/menu_images/Smoked-Hamburgers-Feature.png" style="width: 52%; height: 0%;">
+            <img src="/static/Images/menu_images/Smoked-Hamburgers-Feature.png" >
             <div clss="details">
                 <div class="details2">
                     <h1>Smoked Hamburger</h1>
                     <h5 class="price">Rs 465</h5>
                 </div>
                 <p>Burger with Smokey Grilled Chicken Patty  </p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn1">-</button>
+                    <span class="quantity" id="quantity1">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn1">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -60,7 +74,12 @@
                     <h5 class="price">Rs 575</h5>
                 </div>
                 <p>Chicken tossed in honey and garlic sauce</p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn23">-</button>
+                    <span class="quantity" id="quantity2">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -72,7 +91,12 @@
                     <h5 class="price">Rs 900</h5>
                 </div>
                 <p>Pizza topped with vegetables and pineapple </p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn3">-</button>
+                    <span class="quantity" id="quantity3">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn3">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -84,7 +108,12 @@
                     <h5 class="price">Rs 750</h5>
                 </div>
                 <p>Chicken wings tossed in hot and spicy sauce</p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn4">-</button>
+                    <span class="quantity" id="quantity4">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn4">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -96,19 +125,29 @@
                     <h5 class="price">Rs 350</h5>
                 </div>
                 <p>Penne pasta with creamy garlic cheese sauce </p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn5">-</button>
+                    <span class="quantity" id="quantity5">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn5">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
         <div class="food-items">
-            <img src="/static/Images/menu_images/Chicken-meatballs-and-spaghetti-3.jpg" style="width: 47%; height: 0%;">
+            <img src="/static/Images/menu_images/Chicken-meatballs-and-spaghetti-3.jpg" >
             <div clss="details">
                 <div class="details2">
                     <h1>Chicken Meatball Spaghetti </h1>
                     <h5 class="price">Rs 450</h5>
                 </div>
                 <p>Spaghetti with red sauce and chicken meat balls  </p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn6">-</button>
+                    <span class="quantity" id="quantity6">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn6">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -120,7 +159,12 @@
                     <h5 class="price">Rs 250</h5>
                 </div>
                 <p>Dumplings filled with juicy chicken stuffings</p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn7">-</button>
+                    <span class="quantity" id="quantity7">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn7">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -132,7 +176,12 @@
                     <h5 class="price">Rs 300</h5>
                 </div>
                 <p>French fries loaded with chicken and cheese </p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn8">-</button>
+                    <span class="quantity" id="quantity8">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn8">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
 
@@ -144,7 +193,12 @@
                     <h5 class="price">Rs 200</h5>
                 </div>
                 <p>Bread toasted in garlic butter</p>
-                <button>ADD ITEM</button>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" id="decreaseBtn9">-</button>
+                    <span class="quantity" id="quantity9">1</span>
+                    <button class="quantity-btn increase" id="increaseBtn9">+</button>
+                </div>
+                <button>ADD TO CART</button>
             </div>
         </div>
     </div>
@@ -183,5 +237,7 @@
         </div>
         <p style="text-align: center; margin-top: 20px;">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
     </footer>
+
+    <script src="/static/js/menu.js"></script>
 </body>
 </html>

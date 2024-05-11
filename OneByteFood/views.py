@@ -143,3 +143,7 @@ def update_reservation_user(request, reservation_id):
         return redirect('reservation')  # Redirect to the admin dashboard after updating status
 
     return render(request, 'edit_reservation_status.html', {'reservation': reservation})
+
+def cart_view(request):
+    # Your cart view logic here
+    return render(request, 'cart.html')

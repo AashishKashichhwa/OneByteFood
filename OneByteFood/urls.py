@@ -87,4 +87,5 @@ urlpatterns = [
     path('edit_reservation_user/<int:reservation_id>/', onebytefood_views.edit_reservation_user, name='edit_reservation_user'),
     path('update_user/<int:reservation_id>/', onebytefood_views.update_reservation_user, name='update_reservation_user'),
     path('delete_reservation_user/<int:reservation_id>/', onebytefood_views.delete_reservation_user, name='delete_reservation_user'),
+     path('cart/', onebytefood_views.cart_view, name='cart'),
 ]
