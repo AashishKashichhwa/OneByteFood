@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reservation History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .Back-Btn {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #2c5870, #669bb7);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-guide {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .reservationHistorySearchForm {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .reservationHistorySearchForm label {
+            margin-right: 10px;
+        }
+
+        .reservationHistorySearchForm input[type="text"],
+        .reservationHistorySearchForm input[type="tel"] {
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #E4E4E4;
+            font-size: 18px;
+            color: #32657C;
+            margin-bottom: 10px;
+        }
+
+        .reservationHistorySearchForm input[type="submit"] {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #2c5870, #669bb7);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .history-container {
+            margin-top: 50px;
+            padding-bottom: 200px;
+        }
+
+        .table-history {
+            border: 1px solid #1e1d1d;
+            height: 500px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        .history-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #1e1d1d;
+        }
+
+        .history-table th,
+        .history-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background-color: #32657C;
+            color: #FFF;
+        }
+
+        .edit-btn,
+        .cancel-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #32657C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover,
+        .cancel-btn:hover {
+            background-color: #234555;
+        }
+
+        .cancel-btn {
+            background-color: #C0392B;
+        }
+
+        .no-reservations {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="http://127.0.0.1:8000/reservation/"><button class="Back-Btn"> Back</button></a>
+    <h2 class="section-title">Search Reservation History</h2>
+    <p class="search-guide">* Search your previous reservation history using your name and phone number</p>
+    <form method="get" action="{% url 'show_user_reservation_history' %}" id="reservationHistorySearchForm"
+        class="reservationHistorySearchForm">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="phone">Phone no.:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <input type="submit" value="Search">
+
+    </form>
+
+    <!-- Reservation History -->
+<div class="history-container">
+    <section class="history" id="history">
+        <h2 class="section-title">Reservation History</h2>
+        {% if reservations_data %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Number of People</th>
+                    <th>Comments</th>
+                    <th>Payment Made</th> <!-- Updated column header -->
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add rows for each reservation -->
+                {% for reservation in reservations_data %}
+                <tr>
+                    <td>{{ reservation.name }}</td>
+                    <td>{{ reservation.phone }}</td>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.start_time }}</td>
+                    <td>{{ reservation.end_time }}</td>
+                    <td>{{ reservation.num_people }}</td>
+                    <td>{{ reservation.comments }}</td>
+                    <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td> <!-- Corrected syntax -->
+                    <td>{{ reservation.status }}</td>
+                    <td>
+                        <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
+                        <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h4>No previous reservations.</h4>
+        {% endif %}
+    </section>
+</div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="stylesheet" href="/static/css/events/unicornR.css"> <!-- Link to your CSS file for styling -->
+</head>
+<body>
+    <div class="container">
+        <div class="photo">
+            <img src="/static/Images/event_images/adultbirthdaytheme.jpg" alt="Unicorn Birthday Theme">
+        </div>
+        <div class="reservation-box">
+            <h2>Reservation Details</h2>
+            <form action="#" method="POST">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td><input type="tel" name="phone" required></td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td><input type="date" name="date" required></td>
+                    </tr>
+                    <tr>
+                        <th>Start Time</th>
+                        <td><input type="time" name="start-time" required></td>
+                    </tr>
+                    <tr>
+                        <th>End Time</th>
+                        <td><input type="time" name="end-time" required></td>
+                    </tr>
+                    <tr>
+                        <th>Number of People</th>
+                        <td><input type="number" name="number-of-people" required></td>
+                    </tr>
+                    <tr>
+                        <th>Comments</th>
+                        <td><textarea name="comments" rows="4" cols="30"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Payment</th>
+                        <td><input type="text" name="payment"></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td><input type="text" name="status"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Submit Reservation">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
