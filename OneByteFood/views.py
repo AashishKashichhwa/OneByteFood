@@ -19,14 +19,14 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib import messages
 from .models import Reservation
+from datetime import datetime, time
 
 def reservationDetails(request):
     if request.method == 'POST':
         # Process form submission and save reservation
-        reservation_status = None  # Initialize reservation status message
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         date = request.POST.get('date')
@@ -35,8 +35,11 @@ def reservationDetails(request):
         num_people = request.POST.get('people')
         comments = request.POST.get('needs')
         payment_made = request.POST.get('payment_made') == 'on'
+
+        # Initialize status to pending
         status = 'pending'
 
+        # Create the reservation object
         reservation = Reservation(
             name=name,
             phone=phone,
@@ -51,10 +54,9 @@ def reservationDetails(request):
         reservation.save()
 
         messages.success(request, 'Reservation is requested successfully. Wait admin to verify the reservation status')
-        reservation_status = 'Reservation saved successfully.'  # Update reservation status message
 
         # Redirect to the same page after form submission
-        return HttpResponseRedirect('/reservation_details/?name=' + name + '&phone=' + phone)
+        return redirect('/reservation_details/?name=' + name + '&phone=' + phone)
     else:
         # If it's a GET request or no POST data is sent, show reservations for the user
         name = request.GET.get('name', '')  # Get name from GET request, with a default value of empty string
@@ -67,9 +69,30 @@ def reservationDetails(request):
             # If either name or phone number is missing, show all reservations
             reservations_data = Reservation.objects.all()
 
+        # Update status for existing reservations
+        current_datetime = datetime.now().time()
+
+        for reservation in reservations_data:
+            # Check if payment is made and set status accordingly
+            if reservation.payment_made:
+                reservation.status = 'confirmed'
+            else:
+                reservation.status = 'pending'
+
+            # Convert reservation end time string to time object
+            reservation_end_time = datetime.strptime(str(reservation.end_time), "%H:%M:%S").time()
+
+            # Check if reservation end time has passed and update status to canceled if payment is not made
+            if not reservation.payment_made and current_datetime > reservation_end_time:
+                reservation.status = 'cancelled'
+            # Otherwise, update status to completed if end time has passed
+            elif current_datetime > reservation_end_time:
+                reservation.status = 'completed'
+
+            reservation.save()
+
         # Pass the reservations data to the template
         return render(request, 'reservation.html', {'reservations_data': reservations_data, 'name': name, 'phone': phone})
-
 
 def menu_redirect(request):
     # Redirect to the menu.html page
