@@ -144,6 +144,7 @@
 <div class="history-container">
     <section class="history" id="history">
         <h2 class="section-title">Reservation History</h2>
+        <div class="table-history">
         {% if reservations_data %}
         <table class="history-table">
             <thead>
@@ -182,8 +183,9 @@
             </tbody>
         </table>
         {% else %}
-        <h4>No previous reservations.</h4>
+        <center><h4>No previous reservations.</h4></center>
         {% endif %}
+        </div>
     </section>
 </div>
     </main>
