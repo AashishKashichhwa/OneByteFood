@@ -90,5 +90,5 @@ urlpatterns = [
     path('reservation/user_reservation_history/', onebytefood_views.user_reservation_history_redirect, name='user_reservation_history_redirect'),
     path('reservation_details/user_reservation_history/', onebytefood_views.user_reservation_history_redirect, name='user_reservation_history_redirect'),
     path('user_reservation_history/', onebytefood_views.show_user_reservation_history, name='show_user_reservation_history'),
-
+    path('cart/', onebytefood_views.cart_view, name='cart'),
 ]

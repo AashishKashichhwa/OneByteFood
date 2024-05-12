@@ -6,10 +6,47 @@
 
 }
 
-nav {
-    position: relative;
+.added-to-cart-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.cart-overlay {
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Ensure it's above other content */
+}
+
+.cart-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+.show {
+    display: block;
+}
+
+nav {
+    position: relative;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.9);
     z-index: 800; 
@@ -42,7 +79,30 @@ nav {
 
 .login-button:active {
     transform: translateY(-3px); 
-    }
+}
+
+/* Styles for quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn {
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+    font-size: 12px; /* Decreased font size */
+    padding: 4px 8px; /* Adjusted padding */
+    margin: 0 3px; /* Adjusted margin */
+    width: 25px; /* Adjusted width */
+    height: 25px; /* Adjusted height */
+}
+
+.quantity {
+    font-size: 18px; /* Increased font size */
+    padding: 2px 6px; /* Adjusted padding */
+}
 
 
 .menu ul {
@@ -123,6 +183,7 @@ nav {
 }
 
 .food-items{
+    position: relative;
     width: 30%;
     margin: 15px;
     box-sizing: border-box;
@@ -142,7 +203,7 @@ nav {
 .food-items img{
     width: 200px;
     height: 200px;
-    align-items: center;
+    object-fit: cover;
     margin: 0 auto;
     display: block;
 }
@@ -176,14 +237,34 @@ h5{
     font-weight: 400;
     align-self: stretch;
 }
+/* Styles for quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+    font-size: 14px; /* Decreased font size */
+    padding: 3px 8px; /* Adjusted padding */
+    margin: 0 3px; /* Adjusted margin */
+}
+
+.quantity {
+    font-size: 16px;
+    padding: 0 5px;
+}
+
 button{
     text-align: center;
     background-color:#CF8145;
     border: none;
     color: #19323d;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
-    width:380px;
+    width:70%;
     margin-top: 10px;
     padding: 15px;
 }
