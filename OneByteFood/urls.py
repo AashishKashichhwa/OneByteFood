@@ -91,4 +91,8 @@ urlpatterns = [
     path('reservation_details/user_reservation_history/', onebytefood_views.user_reservation_history_redirect, name='user_reservation_history_redirect'),
     path('user_reservation_history/', onebytefood_views.show_user_reservation_history, name='show_user_reservation_history'),
     path('cart/', onebytefood_views.cart_view, name='cart'),
+    path('events/events/birthdaytheme', onebytefood_views.birthday, name='Birthday'),
+    path('events/events/unicornR', onebytefood_views.unicornR, name='UnicornR'),
+    path('events/events/theme_80', onebytefood_views.theme_80, name='80_theme'),
+    path('events/events/babybirthday', onebytefood_views.babybirthday, name='Babybirthday'),
 ]
