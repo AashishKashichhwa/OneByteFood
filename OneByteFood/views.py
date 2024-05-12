@@ -34,7 +34,7 @@ def reservationDetails(request):
         end_time = request.POST.get('end_time')
         num_people = request.POST.get('people')
         comments = request.POST.get('needs')
-        payment_option = request.POST.get('payment-option')
+        payment_made = request.POST.get('payment_made') == 'on'
         status = 'pending'
 
         reservation = Reservation(
@@ -45,7 +45,7 @@ def reservationDetails(request):
             end_time=end_time,
             num_people=num_people,
             comments=comments,
-            payment_option=payment_option,
+            payment_made=payment_made,
             status=status,
         )
         reservation.save()
