@@ -46,7 +46,8 @@
                     <input type="text" id="name" name="name" required>
 
                     <label for="phone">Phone no.:</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10"
+                        title="Please enter a valid 10-digit phone number" required>
 
                     <label for="date">Date:</label>
                     <input type="date" id="date" name="date" required>
@@ -65,7 +66,7 @@
                     <input type="number" id="people" name="people" min="1" max="10" required>
 
                     <label for="needs">Comments:</label>
-                    <textarea id="needs" name="needs" required></textarea>
+                    <textarea id="needs" name="needs"></textarea>
 
                     <div class="payment">
                         <label for="payment">Payment Made:</label>

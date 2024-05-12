@@ -95,4 +95,6 @@ urlpatterns = [
     path('events/events/unicornR', onebytefood_views.unicornR, name='UnicornR'),
     path('events/events/theme_80', onebytefood_views.theme_80, name='80_theme'),
     path('events/events/babybirthday', onebytefood_views.babybirthday, name='Babybirthday'),
+    path('events/reservation', onebytefood_views.reservation, name='Reservation'),
+    path('events/user_reservation_history', onebytefood_views.user_reservation_history_redirect, name='user_reservation_history_redirect'),
 ]
