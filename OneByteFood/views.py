@@ -172,3 +172,22 @@ def show_user_reservation_history(request):
 def cart_view(request):
     # Your cart view logic here
     return render(request, 'cart.html')
+
+from django.shortcuts import render
+
+def birthday(request):
+    # Your birthday view logic here
+    return render(request, 'birthdaytheme.html')
+
+def unicornR(request):
+    # Your unicorn view logic here
+    return render(request, 'unicornR.html')
+
+def theme_80(request):
+    # Your 80's theme view logic here
+    return render(request, 'theme_80.html')
+
+def babybirthday(request):
+    # Your baby birthday view logic here
+    return render(request, 'babybirthday.html')
+
