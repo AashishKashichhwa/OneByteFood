@@ -168,3 +168,7 @@ def show_user_reservation_history(request):
     else:
         # If it's not a GET request, redirect to the same page
         return HttpResponseRedirect('/user_reservation_history/')
+
+def cart_view(request):
+    # Your cart view logic here
+    return render(request, 'cart.html')
