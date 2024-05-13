@@ -244,3 +244,21 @@ def babybirthday(request):
     # Your baby birthday view logic here
     return render(request, 'babybirthday.html')
 
+from .models import BirthdayThemeReservation
+
+def reservation_form(request):
+    if request.method == 'POST':
+        form_data = request.POST
+        reservation = BirthdayThemeReservation(
+            name=form_data['name'],
+            phone=form_data['phone'],
+            reservation_date=form_data['date'],
+            start_time=form_data['start-time'],
+            end_time=form_data['end-time'],
+            number_of_people=form_data['number-of-people'],
+            comments=form_data['comments'],
+            status=form_data['status']
+        )
+        reservation.save()
+        return render(request, 'success.html')  # Redirect to a success page
+    return render(request, 'reservation_form.html') 
