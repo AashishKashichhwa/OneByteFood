@@ -134,9 +134,20 @@ def delete_reservation_user(request, reservation_id):
 
     reservation.delete()
     
-    # Redirect to the reservation details page with name and phone parameters
-    return redirect('/reservation_details/?name=' + name + '&phone=' + phone)
+     # Redirect to the reservation details page with name and phone parameters
+    return redirect('/reservation_details/?name=' + reservation.name + '&phone=' + reservation.phone)
 
+def cancel_reservation_user(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    
+    # Retrieve name and phone from the request.GET dictionary
+    name = request.GET.get('name', '')
+    phone = request.GET.get('phone', '')
+
+    reservation.delete()
+    
+    # Redirect to the reservation details page with name and phone parameters
+    return redirect('/user_reservation_history/?name=' + reservation.name + '&phone=' + reservation.phone)
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reservation
 from django.contrib import messages
@@ -156,22 +167,41 @@ def update_reservation(request, reservation_id):
         return redirect('admin_dashboard')  # Redirect to the admin dashboard after updating status
 
     return render(request, 'edit_reservation_status.html', {'reservation': reservation})
-def update_reservation_user(request, reservation_id):
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Reservation
+
+def edit_reservation_user(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
-    
+    return render(request, 'edit_res_user.html', {'reservation': reservation})
+
+def update_reservation_user(request):
     if request.method == 'POST':
-        new_status = request.POST.get('status')
-        reservation.status = new_status
+        reservation_id = request.POST.get('reservation_id')
+        reservation = get_object_or_404(Reservation, pk=reservation_id)
+        
+        # Update reservation fields
+        reservation.name = request.POST.get('name')
+        reservation.phone = request.POST.get('phone')
+        reservation.date = request.POST.get('date')
+        reservation.start_time = request.POST.get('start_time')
+        reservation.end_time = request.POST.get('end_time')
+        reservation.num_people = request.POST.get('num_people')
+        reservation.comments = request.POST.get('comments')
+        reservation.payment_made = request.POST.get('payment_made') == 'on'  # Checkbox value handling
+        reservation.status = request.POST.get('status')
+        
         reservation.save()
-        return redirect('reservation')  # Redirect to the admin dashboard after updating status
+        
+         # Redirect to the reservation details page with name and phone parameters
+    return redirect('/reservation_details/?name=' + reservation.name + '&phone=' + reservation.phone)
 
-    return render(request, 'edit_reservation_status.html', {'reservation': reservation})
-
+    return render(request, 'edit_res_user.html')
 
 def user_reservation_history_redirect(request):
     # Redirect to the user_reservation_history.html page
     return render(request, 'user_reservation_history.html')
-
+# This view handles the user reservation history page
 
 def show_user_reservation_history(request):
     if request.method == 'GET':
