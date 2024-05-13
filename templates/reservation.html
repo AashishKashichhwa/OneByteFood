@@ -85,52 +85,56 @@
         </div>
 
         <!-- Reservation History -->
-<div class="history-container">
-    <section class="history" id="history">
-        <h2 class="section-title">Reservation History</h2>
-        <p class="check-history">Look your previous reservations from <a href="user_reservation_history">here. </a></p>
-        {% if reservations_data %}
-        <table class="history-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Number of People</th>
-                    <th>Comments</th>
-                    <th>Payment Made</th> <!-- Updated column header -->
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Add rows for each reservation -->
-                {% for reservation in reservations_data %}
-                <tr>
-                    <td>{{ reservation.name }}</td>
-                    <td>{{ reservation.phone }}</td>
-                    <td>{{ reservation.date }}</td>
-                    <td>{{ reservation.start_time }}</td>
-                    <td>{{ reservation.end_time }}</td>
-                    <td>{{ reservation.num_people }}</td>
-                    <td>{{ reservation.comments }}</td>
-                    <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td> <!-- Corrected syntax -->
-                    <td>{{ reservation.status }}</td>
-                    <td>
-                        <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
-                        <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">Cancel</a></button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <h4 class="validation">No previous reservations.</h4>
-        {% endif %}
-    </section>
-</div>
+        <div class="history-container">
+            <section class="history" id="history">
+                <h2 class="section-title">Reservation History</h2>
+                <p class="check-history">Look your previous reservations from <a href="user_reservation_history">here.
+                    </a></p>
+                {% if reservations_data %}
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Number of People</th>
+                            <th>Comments</th>
+                            <th>Payment Made</th> <!-- Updated column header -->
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add rows for each reservation -->
+                        {% for reservation in reservations_data %}
+                        <tr>
+                            <td>{{ reservation.name }}</td>
+                            <td>{{ reservation.phone }}</td>
+                            <td>{{ reservation.date }}</td>
+                            <td>{{ reservation.start_time }}</td>
+                            <td>{{ reservation.end_time }}</td>
+                            <td>{{ reservation.num_people }}</td>
+                            <td>{{ reservation.comments }}</td>
+                            <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td>
+                            <!-- Corrected syntax -->
+                            <td>{{ reservation.status }}</td>
+                            <td>
+                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}"
+                                        style="text-decoration: none; color: inherit;">EDIT</a></button>
+                                <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}"
+                                        style="text-decoration: none; color: inherit;">Cancel</a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <h4 class="validation">No previous reservations.</h4>
+                {% endif %}
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -192,7 +196,23 @@
                 event.preventDefault(); // Prevent form submission
             }
 
+            const comments = document.getElementById('comments').value.trim();
+            // Check if comments are empty
+            if (!comments) {
+                const confirmEmptyComments = confirm('Are you sure you want to leave the comments empty?');
+                if (!confirmEmptyComments) {
+                    event.preventDefault(); // Prevent form submission
+                }
+            }
+
+            const phoneNumber = document.getElementById('phone').value.trim();
+            // Check if phone number is 10 digits starting with 98
+            if (!/^(98)\d{8}$/.test(phoneNumber)) {
+                alert('Please enter a valid 10-digit phone number starting with 98.');
+                event.preventDefault(); // Prevent form submission
+            }
         });
+
 
         // Function to clear the form
         function clearForm() {
