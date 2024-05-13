@@ -14,49 +14,44 @@
         }
 
         .Back-Btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: linear-gradient(to right, #2c5870, #669bb7);
             color: #fff;
             border: none;
             border-radius: 20px;
             text-decoration: none;
             cursor: pointer;
-            margin-top: 15px;
-            margin-left: 15px;
+            margin: 15px 15px 0 15px;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .section-title,
         .search-guide {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .reservationHistorySearchForm {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-align: center;
         }
 
         .reservationHistorySearchForm label {
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         .reservationHistorySearchForm input[type="text"],
         .reservationHistorySearchForm input[type="tel"] {
-            width: 200px;
-            padding: 10px;
+            width: 180px;
+            padding: 8px;
             border-radius: 5px;
             border: 1px solid #E4E4E4;
-            font-size: 18px;
+            font-size: 16px;
             color: #32657C;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .reservationHistorySearchForm input[type="submit"] {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: linear-gradient(to right, #2c5870, #669bb7);
             color: #fff;
             border: none;
@@ -66,15 +61,14 @@
         }
 
         .history-container {
-            margin-top: 50px;
-            padding-bottom: 200px;
+            margin-top: 30px;
+            padding-bottom: 150px;
         }
 
         .table-history {
             border: 1px solid #1e1d1d;
-            height: 500px;
-            margin-left: 100px;
-            margin-right: 100px;
+            height: 400px;
+            margin: 0 50px;
         }
 
         .history-table {
@@ -86,7 +80,7 @@
         .history-table th,
         .history-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 6px;
             text-align: left;
         }
 
@@ -97,7 +91,7 @@
 
         .edit-btn,
         .cancel-btn {
-            padding: 5px 10px;
+            padding: 4px 8px;
             margin-right: 5px;
             background-color: #32657C;
             color: white;
@@ -118,8 +112,8 @@
 
         .no-reservations {
             text-align: center;
-            margin-top: 50px;
-            font-size: 1.2rem;
+            margin-top: 30px;
+            font-size: 1.1rem;
             color: #333;
         }
     </style>
@@ -141,53 +135,59 @@
     </form>
 
     <!-- Reservation History -->
-<div class="history-container">
-    <section class="history" id="history">
-        <h2 class="section-title">Reservation History</h2>
-        <div class="table-history">
-        {% if reservations_data %}
-        <table class="history-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Number of People</th>
-                    <th>Comments</th>
-                    <th>Payment Made</th> <!-- Updated column header -->
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Add rows for each reservation -->
-                {% for reservation in reservations_data %}
-                <tr>
-                    <td>{{ reservation.name }}</td>
-                    <td>{{ reservation.phone }}</td>
-                    <td>{{ reservation.date }}</td>
-                    <td>{{ reservation.start_time }}</td>
-                    <td>{{ reservation.end_time }}</td>
-                    <td>{{ reservation.num_people }}</td>
-                    <td>{{ reservation.comments }}</td>
-                    <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td> <!-- Corrected syntax -->
-                    <td>{{ reservation.status }}</td>
-                    <td>
-                        <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">EDIT</a></button>
-                        <button class="cancel-btn"><a href="/delete_reservation_user/{{ reservation.id }}" style="text-decoration: none; color: inherit;">DELETE</a></button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <center><h4>No previous reservations.</h4></center>
-        {% endif %}
-        </div>
-    </section>
-</div>
+    <div class="history-container">
+        <section class="history" id="history">
+            <h2 class="section-title">Reservation History</h2>
+            <div class="table-history">
+                {% if reservations_data %}
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone Number</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Number of People</th>
+                            <th>Comments</th>
+                            <th>Payment Made</th> <!-- Updated column header -->
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add rows for each reservation -->
+                        {% for reservation in reservations_data %}
+                        <tr>
+                            <td>{{ reservation.name }}</td>
+                            <td>{{ reservation.phone }}</td>
+                            <td>{{ reservation.date }}</td>
+                            <td>{{ reservation.start_time }}</td>
+                            <td>{{ reservation.end_time }}</td>
+                            <td>{{ reservation.num_people }}</td>
+                            <td>{{ reservation.comments }}</td>
+                            <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td>
+                            <!-- Corrected syntax -->
+                            <td>{{ reservation.status }}</td>
+                            <td>
+                                <button class="edit-btn"><a href="/edit_reservation_user/{{ reservation.id }}"
+                                        style="text-decoration: none; color: inherit;">EDIT</a></button>
+                                <button class="cancel-btn"><a
+                                        href="/cancel_reservation_user/{{ reservation.id }}/?name={{ reservation.name }}&phone={{ reservation.phone }}"
+                                        style="text-decoration: none; color: inherit;">CANCEL</a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <center>
+                    <h4>No previous reservations.</h4>
+                </center>
+                {% endif %}
+            </div>
+        </section>
+    </div>
     </main>
 </body>
 

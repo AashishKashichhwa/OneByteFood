@@ -83,66 +83,47 @@ nav {
 .content {
     border: solid #E4E4E4;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-    /* display: grid; */
-    align-content: space-between;
     display: flex;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* grid-gap: 10px; */
-
-}
-
-
-.reservation-form {
-    grid-column: 1 /1;
+    margin: 0 20px 50px;
 }
 
 .reservation-form-container {
-    /* margin-left: 50px; */
-    /* margin-right: 30px;
-margin-top: 40px; */
-    /* margin-left: 40px; */
-    padding: 34px;
+    padding: 20px;
     width: 35%;
-
 }
 
-
 .history {
-    padding-bottom: 200px;
+    padding-bottom: 50px;
     border: 1px solid #1e1d1d;
-    width: 258%;
+    width: 930px;
     height: 90%;
-    /* Adjust the width as needed */
-    /* height: 70vh; */
-    /* Adjust the height as needed */
-    margin-top: 40px;
+    margin: 40px 0;
     overflow: auto;
-    /* Add overflow auto to enable scrolling if needed */
 }
 
 label {
     text-align: right;
-    padding-right: 10px;
-    font-size: 18px;
+    padding-right: 5px;
+    font-size: 16px;
     color: #32657C;
+}
+
+.check-history{
+    margin-left:10px;
 }
 
 input,
 select,
 textarea {
-    width: 100%;
-    padding: 10px;
+    width: 95%;
+    padding: 8px;
     border-radius: 5px;
     border: 1px solid #E4E4E4;
-    font-size: 18px;
+    font-size: 16px;
     color: #32657C;
-    margin-bottom: 10p
+    margin-bottom: 10px;
 }
 
-/* Add the following styles to your CSS file */
 .payment-options {
     display: flex;
     flex-wrap: wrap;
@@ -150,44 +131,35 @@ textarea {
 }
 
 .payment-options label {
-    margin-right: 20px;
+    margin-right: 10px;
     margin-bottom: 5px;
 }
 
 .payment-options label img {
     height: 30px;
     width: auto;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 .payment-options input[type="radio"] {
-    margin-right: 5px;
+    margin-right: 3px;
 }
 
-.reserve-btn {
-    padding: 10px 20px;
-    background: linear-gradient(to right, #2c5870, #669bb7);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
+.reserve-btn,
 .reset-btn {
-    padding: 10px 20px;
+    padding: 8px 15px;
     background: linear-gradient(to right, #2c5870, #669bb7);
     color: #fff;
     border: none;
     border-radius: 20px;
     text-decoration: none;
     cursor: pointer;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .history-table {
@@ -199,7 +171,7 @@ textarea {
 .history-table th,
 .history-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 6px;
     text-align: left;
 }
 
@@ -207,6 +179,11 @@ textarea {
     background-color: #32657C;
     color: #FFF;
 }
+
+.validation{
+    margin-left: 10px;
+}
+
 
 /*Footer*/
 .containerfooter {
@@ -303,4 +280,20 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
+}
+
+.edit-btn, .cancel-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    background-color: #32657C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.cancel-btn {
+    background-color: #C0392B;
 }
