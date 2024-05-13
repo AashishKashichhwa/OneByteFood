@@ -17,6 +17,17 @@ class FoodItem(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     quantity = models.CharField(max_length=140, default='1')
 
+class BirthdayThemeReservation(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    reservation_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    number_of_people = models.IntegerField()
+    comments = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=50, blank=True, null=True)
+
+
 
 # class Order(models.Model):
 #     created_at = models.DateTimeField(auto_now_add=True)
