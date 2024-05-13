@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Reservation</title>
-    <link rel="stylesheet" href="/static/css/events/unicornR.css"> <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="/static/css/events/theme_80.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="photo">
-            <img src="/static/Images/event_images/adultbirthdaytheme.jpg" alt="Unicorn Birthday Theme">
+            <img src="/static/Images/event_images/children.jpg" alt="Unicorn Birthday Theme">
         </div>
         <div class="reservation-box">
-            <h2>Reservation Details</h2>
+            <h2>Reservation Details  <a href="javascript:history.back()" class="continue-button" style="margin-left: 300px;">
+                
+                <i class="fas fa-arrow-left"></i></a> </h2>
+              
             <form action="#" method="POST">
                 <table>
                     <tr>
@@ -44,15 +49,11 @@
                         <td><textarea name="comments" rows="4" cols="30"></textarea></td>
                     </tr>
                     <tr>
-                        <th>Payment</th>
-                        <td><input type="text" name="payment"></td>
-                    </tr>
-                    <tr>
                         <th>Status</th>
                         <td><input type="text" name="status"></td>
                     </tr>
                 </table>
-                <input type="submit" value="Submit Reservation">
+                <input type="submit" style="font-weight: bold;" value="Submit Reservation">
             </form>
         </div>
     </div>
