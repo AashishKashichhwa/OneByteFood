@@ -303,21 +303,54 @@ def babybirthday(request):
     # Your baby birthday view logic here
     return render(request, 'babybirthday.html')
 
-from .models import BirthdayThemeReservation
 
-def reservation_form(request):
+
+from django.shortcuts import render
+from .models import birthday_theme_reservation  # Importing the model
+
+def reservationTheme(request):
+    # Retrieve existing reservations data based on provided name and phone number
+    name = request.GET.get('name', '')  
+    phone = request.GET.get('phone', '')  
+
+    if name and phone:
+        reservations_data = birthday_theme_reservation.objects.filter(name=name, phone=phone)
+    else:
+        # If either name or phone number is missing, show all reservations
+        reservations_data = birthday_theme_reservation.objects.all()
+
     if request.method == 'POST':
-        form_data = request.POST
-        reservation = BirthdayThemeReservation(
-            name=form_data['name'],
-            phone=form_data['phone'],
-            reservation_date=form_data['date'],
-            start_time=form_data['start-time'],
-            end_time=form_data['end-time'],
-            number_of_people=form_data['number-of-people'],
-            comments=form_data['comments'],
-            status=form_data['status']
+        # Process form submission and save reservation
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        date = request.POST.get('date')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+        num_people = request.POST.get('people')
+        comments = request.POST.get('needs')
+        payment_made = request.POST.get('payment_made') == 'on'
+
+        # Initialize status to pending
+        status = 'pending'
+        theme = 'unicorn'
+
+        # Create the reservation object
+        reservation = birthday_theme_reservation(
+            name=name,
+            phone=phone,
+            date=date,
+            start_time=start_time,
+            end_time=end_time,
+            num_people=num_people,
+            comments=comments,
+            payment_made=payment_made,
+            status=status,
         )
         reservation.save()
-        return render(request, 'success.html')  # Redirect to a success page
-    return render(request, 'reservation_form.html') 
+
+        messages.success(request, 'Reservation is requested successfully. Wait admin to verify the reservation status')
+
+        # Redirect to the same page after form submission
+        return render(request, 'unicorn_data.html', context={'reservations_data': reservations_data}) # Pass the reservations data to the template
+
+    return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone}) # Pass the reservations data to the template

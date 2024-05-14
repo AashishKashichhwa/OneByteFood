@@ -35,15 +35,18 @@ class CartItem(models.Model):
         else:
             return f"Anonymous User's Cart Item - {self.food_item.name}"
 
-class BirthdayThemeReservation(models.Model):
+class birthday_theme_reservation(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
-    reservation_date = models.DateField()
+    date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
-    number_of_people = models.IntegerField()
-    comments = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=50, blank=True, null=True)
+    num_people = models.IntegerField()
+    comments = models.TextField()
+    payment_made = models.BooleanField(default=False)
+    status = models.CharField(max_length=50, default='pending')
+    theme = models.CharField(max_length=50,default='unicorn')
 
 
 
