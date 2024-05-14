@@ -14,11 +14,20 @@ admin.site.register(Reservation, ReservationAdmin)
 #     list_display = ('name', 'price', 'image', 'last_name', 'password', 'admin')
 
 from django.contrib import admin
-from .models import FoodItem
+from .models import FoodItem, CartItem
 
 @admin.register(FoodItem)
 class FoodItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'quantity')
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'get_food_name', 'user', 'quantity', 'price')  # Display food name, user, name, and quantity
+
+    def get_food_name(self, obj):
+        return obj.food_item.name
+    
+    get_food_name.short_description = 'Food Name'
 
 @admin.register(BirthdayThemeReservation)
 class BirthdayThemeReservationAdmin(admin.ModelAdmin):

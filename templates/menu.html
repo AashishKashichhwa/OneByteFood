@@ -3,29 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneByte Foods</title>
+    <title>OneByte Foods - Menu</title>
     <link rel="stylesheet" href="/static/css/menu.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="addedToCartMessage" class="added-to-cart-message">
-        <p>Item added to cart!</p>
-    </div>
-
-    <div id="cart-overlay" class="cart-overlay">
-        <div class="cart-content">
-            <!-- Cart content goes here -->
-            <!-- Example: -->
-            <!-- <div class="cart-item">Item 1</div> -->
-            <!-- <div class="cart-item">Item 2</div> -->
-        </div>
-    </div>
-
-     <!--Nav Bar-->
     <nav>
         <div class="container">
             <div class="logo">
@@ -38,7 +22,8 @@
                     <li><a href="{% url 'events_redirect' %}">Events</a></li>
                     <li><a href="{% url 'reservation' %}">Reservations</a></li>
                     <li><a href="{% url 'gallery_redirect' %}">Gallery</a></li>
-                    <li><a href="#" id="cart-icon-link"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="/cart/" id="cart-icon-link"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+
                     
                     <!-- <li class="dropdown"> 
                         <a href="#" class="dropbtn" style="color: #cf8145;">Reservations <i class="fas fa-caret-down"></i></a>
@@ -53,164 +38,33 @@
             
         </div>
     </nav>
-
-    
-    
-
-    <div class="menu">
-        <div class="food-items">
-            <img src="/static/Images/menu_images/Smoked-Hamburgers-Feature.png" >
-            <div clss="details">
-                <div class="details2">
-                    <h1>Smoked Hamburger</h1>
-                    <h5 class="price">Rs 465</h5>
-                </div>
-                <p>Burger with Smokey Grilled Chicken Patty  </p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn1">-</button>
-                    <span class="quantity" id="quantity1">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn1">+</button>
-                </div>
-                <button class="add-to-cart-btn" data-item="1">ADD TO CART</button>
+  <!-- Menu Section -->
+<div class="menu">
+    {% for food_item in food_items %}
+    <div class="food-items">
+        <img src="{{ food_item.image_url }}">
+        <div class="details">
+            <div class="details2">
+                <h1>{{ food_item.name }}</h1>
+                <h5 class="price">Rs {{ food_item.price }}</h5>
             </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/honey-garlic-chicken.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Honey Garlic Chicken </h1>
-                    <h5 class="price">Rs 575</h5>
-                </div>
-                <p>Chicken tossed in honey and garlic sauce</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn23">-</button>
-                    <span class="quantity" id="quantity2">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn">+</button>
-                </div>
-                <button class="add-to-cart-btn" data-item="1">ADD TO CART</button>
+            <p>{{ food_item.description }}</p>
+            <div class="quantity-controls">
+                <button class="quantity-btn decrease" id="decreaseBtn{{ food_item.id }}">-</button>
+                <span class="quantity" id="quantity{{ food_item.id }}">1</span>
+                <button class="quantity-btn increase" id="increaseBtn{{ food_item.id }}">+</button>
             </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/chicken-pizza.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Hawaiian Pizza </h1>
-                    <h5 class="price">Rs 900</h5>
-                </div>
-                <p>Pizza topped with vegetables and pineapple </p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn3">-</button>
-                    <span class="quantity" id="quantity3">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn3">+</button>
-                </div>
-                <button class="add-to-cart-btn" data-item="1">ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/spicy.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Spicy Hot Chicken Wings </h1>
-                    <h5 class="price">Rs 750</h5>
-                </div>
-                <p>Chicken wings tossed in hot and spicy sauce</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn4">-</button>
-                    <span class="quantity" id="quantity4">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn4">+</button>
-                </div>
-                <button class="add-to-cart-btn" data-item="1">ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/garlic-chicken-penne.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Creamy Garlic Penne Pasta</h1>
-                    <h5 class="price">Rs 350</h5>
-                </div>
-                <p>Penne pasta with creamy garlic cheese sauce </p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn5">-</button>
-                    <span class="quantity" id="quantity5">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn5">+</button>
-                </div>
-                <button>ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/Chicken-meatballs-and-spaghetti-3.jpg" >
-            <div clss="details">
-                <div class="details2">
-                    <h1>Chicken Meatball Spaghetti </h1>
-                    <h5 class="price">Rs 450</h5>
-                </div>
-                <p>Spaghetti with red sauce and chicken meat balls  </p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn6">-</button>
-                    <span class="quantity" id="quantity6">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn6">+</button>
-                </div>
-                <button>ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/momo.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Chicken MOMO</h1>
-                    <h5 class="price">Rs 250</h5>
-                </div>
-                <p>Dumplings filled with juicy chicken stuffings</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn7">-</button>
-                    <span class="quantity" id="quantity7">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn7">+</button>
-                </div>
-                <button>ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/fries.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Chicken Cheesy Fries</h1>
-                    <h5 class="price">Rs 300</h5>
-                </div>
-                <p>French fries loaded with chicken and cheese </p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn8">-</button>
-                    <span class="quantity" id="quantity8">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn8">+</button>
-                </div>
-                <button>ADD TO CART</button>
-            </div>
-        </div>
-
-        <div class="food-items">
-            <img src="/static/Images/menu_images/garlic.jpg">
-            <div clss="details">
-                <div class="details2">
-                    <h1>Garlic Bread</h1>
-                    <h5 class="price">Rs 200</h5>
-                </div>
-                <p>Bread toasted in garlic butter</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn decrease" id="decreaseBtn9">-</button>
-                    <span class="quantity" id="quantity9">1</span>
-                    <button class="quantity-btn increase" id="increaseBtn9">+</button>
-                </div>
-                <button>ADD TO CART</button>
-            </div>
+            <form method="post" action="{% url 'add_to_cart' %}">
+                {% csrf_token %}
+                <input type="hidden" name="food_item_id" value="{{ food_item.id }}">
+                <input type="hidden" name="quantity" value="1" id="quantityInput{{ food_item.id }}">
+                <button type="submit" class="add-to-cart-btn">ADD TO CART</button>
+            </form>
         </div>
     </div>
+    {% endfor %}
+</div>
+
 
     <!--Footer-->
     <footer style="background-image: url('footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
@@ -247,6 +101,7 @@
         <p style="text-align: center; margin-top: 20px;">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script src="/static/js/menu.js"></script>
 </body>
 </html>
