@@ -94,9 +94,28 @@ def reservationDetails(request):
         # Pass the reservations data to the template
         return render(request, 'reservation.html', {'reservations_data': reservations_data, 'name': name, 'phone': phone})
 
-def menu_redirect(request):
-    # Redirect to the menu.html page
-    return render(request, 'menu.html')
+from django.shortcuts import render, redirect
+from .models import FoodItem, CartItem
+
+def menu_view(request):
+    if request.method == 'POST':
+        food_item_id = request.POST.get('food_item_id')
+        quantity = int(request.POST.get('quantity', 1))
+        food_item = FoodItem.objects.get(pk=food_item_id)
+        
+        # Check if the item already exists in the cart for the current user
+        existing_cart_item = CartItem.objects.filter(user=request.user, food_item=food_item).first()
+        
+        if existing_cart_item:
+            # If the item already exists, update the quantity
+            existing_cart_item.quantity += quantity
+            existing_cart_item.save()
+        else:
+            # If the item does not exist, create a new CartItem
+            cart_item = CartItem.objects.create(user=request.user, food_item=food_item, quantity=quantity)
+        
+    food_items = FoodItem.objects.all().values('id', 'name', 'price', 'description', 'image_url')
+    return render(request, 'menu.html', {'food_items': food_items})
 
 def events_redirect(request):
     # Redirect to the menu.html page
@@ -148,6 +167,8 @@ def cancel_reservation_user(request, reservation_id):
     
     # Redirect to the reservation details page with name and phone parameters
     return redirect('/user_reservation_history/?name=' + reservation.name + '&phone=' + reservation.phone)
+
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reservation
 from django.contrib import messages
@@ -222,9 +243,47 @@ def show_user_reservation_history(request):
         # If it's not a GET request, redirect to the same page
         return HttpResponseRedirect('/user_reservation_history/')
 
+from django.shortcuts import render
+from .models import CartItem
+
+def cart(request):
+    cart_items = CartItem.objects.all()
+    total_items = cart_items.count()
+    total_price = sum(item.price for item in cart_items)
+    context = {
+        'cart_items': cart_items,
+        'total_items': total_items,
+        'total_price': total_price
+    }
+    return render(request, 'cart.html', context)
+
+def add_to_cart(request):
+    if request.method == 'POST':
+        food_item_id = request.POST.get('food_item_id')
+        quantity = request.POST.get('quantity')
+        # Assuming you have a FoodItem model with id, name, price, etc.
+        food_item = FoodItem.objects.get(pk=food_item_id)
+        total_price = food_item.price * int(quantity)
+        # Create a CartItem object and save it to the database
+        cart_item = CartItem.objects.create(
+            food_item=food_item,
+            quantity=quantity,
+            price=total_price  # Calculate price based on quantity
+        )
+        return redirect('menu_redirect')  # Redirect to the cart page
+    else:
+        return redirect('index')
+    
 def cart_view(request):
-    # Your cart view logic here
-    return render(request, 'cart.html')
+    cart_items = CartItem.objects.all()
+    total_items = cart_items.count()
+    total_price = sum(item.price for item in cart_items)
+    context = {
+        'cart_items': cart_items,
+        'total_items': total_items,
+        'total_price': total_price
+    }
+    return render(request, 'cart.html', context)
 
 from django.shortcuts import render
 

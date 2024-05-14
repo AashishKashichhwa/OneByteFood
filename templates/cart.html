@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <link rel="stylesheet" href="/static/css/nav.css">
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img src="/static/Images/Logo.png" alt="OneByte Foods Logo">
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'menu_redirect' %}">Menu</a></li>
+                    <li><a href="{% url 'events_redirect' %}">Events</a></li>
+                    <li><a href="{% url 'reservation' %}">Reservations</a></li>
+                    <li><a href="{% url 'gallery_redirect' %}">Gallery</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <h1>Billing</h1>
+        <div class="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                <div class="item-details">
+                    <h2>{{ item.name }}</h2>
+                    <p>Price: ${{ item.price }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="cart-summary">
+            <h2>Summary</h2>
+            <p>Total Items: {{ total_items }}</p>
+            <p>Total Price: ${{ total_price }}</p>
+        </div>
+        <div class="checkout-form">
+            <h2>Checkout Details</h2>
+            <form method="post" action="/checkout/">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="place">Place:</label>
+                <input type="text" id="place" name="place" required><br>
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required><br>
+                <button type="submit">Checkout</button>
+            </form>
+        </div>
+        <p class="success-message" id="successMessage" style="display: none;">Checkout Successful!</p>
+    </div>
+    
+
+    <footer
+        style="background-image: url('/static/Images/Footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
+        <div class="containerfooter">
+            <div class="footer-section">
+                <div class="logo-section">
+                    <img src="/static/images/logo.png" alt="OneByte Foods Logo">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h2>About Us</h2>
+                <p>
+                    At OneByte Foods, we understand the importance of creating memorable moments around the dining
+                    table. That's why we've embarked on a journey to revolutionize the way you experience dining with
+                    our cutting-edge dine-in booking system and efficient management tools.
+                </p>
+            </div>
+            <div class="footer-section contact-section">
+                <h2>Contact Information</h2>
+                <p>Lazimpat, Kathmandu</p>
+                <p>Phone: +9867976546</p>
+                <h2>Payment Partners</h2>
+                <div class="payment-partners">
+                    <a href="https://esewa.com.np"><img src="/static/Images/esewa.png" alt="eSewa"></a>
+                    <a href="https://khalti.com"><img src="/static/Images/khalti.png" alt="Khalti"></a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2024 OneByte Foods. All Rights Reserved.</p>
+    </footer>
+  
+<script>
+    function showSuccessMessage() {
+        document.getElementById("successMessage").style.display = "block";
+    }
+</script>
+</body>
+</html>
