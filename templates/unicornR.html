@@ -16,42 +16,49 @@
         <div class="reservation-box">
             <h2>Reservation Details  <a href="javascript:history.back()" class="continue-button" style="margin-left: 300px;"> 
                 <i class="fas fa-arrow-left"></i></a> </h2>
-            <form action="#" method="POST">
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <td><input type="text" name="name" required></td>
-                    </tr>
-                    <tr>
-                        <th>Phone Number</th>
-                        <td><input type="tel" name="phone" required></td>
-                    </tr>
-                    <tr>
-                        <th>Date</th>
-                        <td><input type="date" name="date" required></td>
-                    </tr>
-                    <tr>
-                        <th>Start Time</th>
-                        <td><input type="time" name="start-time" required></td>
-                    </tr>
-                    <tr>
-                        <th>End Time</th>
-                        <td><input type="time" name="end-time" required></td>
-                    </tr>
-                    <tr>
-                        <th>Number of People</th>
-                        <td><input type="number" name="number-of-people" required></td>
-                    </tr>
-                    <tr>
-                        <th>Comments</th>
-                        <td><textarea name="comments" rows="4" cols="30"></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>Status</th>
-                        <td><input type="text" name="status"></td>
-                    </tr>
-                </table>
-                <input type="submit" style="font-weight: bold;" value="Submit Reservation">
+                <form method="post" action="{% url 'reservation_theme' %}" id="reservationBirthday" class="reservationForm-form">
+                {% csrf_token %}
+                <fieldset class="fieldset">
+                    <legend>Reservation Information</legend>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="phone">Phone no.:</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10"
+                        title="Please enter a valid 10-digit phone number" required>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+
+                    <label for="time">Time:</label>
+                    <br>
+                    <br>
+                    <p>Time must be of at least 30 minutes.</p>
+                    <label for="start_time">From: </label>
+                    <input id="start_time" type="time" name="start_time" value="--:--" />
+
+                    <label for="end_time">To: </label>
+                    <input id="end_time" type="time" name="end_time" value="--:--" />
+
+                    <label for="people">No. of people:</label>
+                    <input type="number" id="people" name="people" min="1" max="10" required>
+
+                    <label for="needs">Comments:</label>
+                    <textarea id="needs" name="needs"></textarea>
+
+                    <div class="payment">
+                        <label for="payment">Payment Made:</label>
+                        <div class="payment-options">
+                            <label>
+                                <input type="checkbox" id="payment_made" name="payment_made">
+                            </label>
+                        </div>
+                    </div>
+
+                    <a href="unicorn_data"><button type="reserve" class="reserve-btn">Reserve</button></a>
+                    <button type="reset" class="reset-btn">Reset</button>
+                </fieldset>
+                {% csrf_token %}
             </form>
         </div>
     </div>

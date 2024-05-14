@@ -93,12 +93,15 @@ urlpatterns = [
     path('cart/', onebytefood_views.cart_view, name='cart_view'),
     path('cart/', onebytefood_views.cart_view, name='cart'),
     path('add_to_cart/', onebytefood_views.add_to_cart, name='add_to_cart'),
-    path('events/events/birthdaytheme', onebytefood_views.birthday, name='Birthday'),
-    path('events/events/unicornR', onebytefood_views.unicornR, name='UnicornR'),
+    path('events/birthdaytheme', onebytefood_views.birthday, name='Birthday'),
+    path('events/unicornR', onebytefood_views.unicornR, name='UnicornR'),
     path('events/events/theme_80', onebytefood_views.theme_80, name='80_theme'),
     path('events/events/babybirthday', onebytefood_views.babybirthday, name='Babybirthday'),
     path('events/reservation', onebytefood_views.reservation, name='Reservation'),
     path('events/user_reservation_history', onebytefood_views.user_reservation_history_redirect, name='user_reservation_history_redirect'),
+    path('reservation_theme/', onebytefood_views.reservationTheme, name='reservation_theme'),
+    path('reservation_details/',onebytefood_views.reservationDetails, name='reservation_details'),
     path('update_reservation_user/', onebytefood_views.update_reservation_user, name='update_reservation_user'),
     path('cancel_reservation_user/<int:reservation_id>/', onebytefood_views.cancel_reservation_user, name='cancel_reservation_user'),
+
 ]

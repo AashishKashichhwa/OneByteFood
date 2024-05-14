@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Reservation
-from .models import BirthdayThemeReservation
 
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ('id','name', 'phone', 'date', 'start_time', 'end_time', 'num_people', 'comments', 'payment_made','status')
@@ -29,11 +28,12 @@ class CartItemAdmin(admin.ModelAdmin):
     
     get_food_name.short_description = 'Food Name'
 
-@admin.register(BirthdayThemeReservation)
-class BirthdayThemeReservationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'phone', 'reservation_date', 'start_time', 'end_time', 'number_of_people', 'status']
-    search_fields = ['name', 'phone']
-    list_filter = ['reservation_date']
-    date_hierarchy = 'reservation_date'
 
+from OneByteFood.models import birthday_theme_reservation
+class birthdayThemeReservationAdmin(admin.ModelAdmin):
+    list_display = ('id','name', 'phone', 'date', 'start_time', 'end_time', 'num_people', 'comments', 'payment_made','status','theme')
+    # search_fields = ['name', 'phone']
+    # list_filter = ['reservation_date']
+    # date_hierarchy = 'reservation_date'
 
+admin.site.register(birthday_theme_reservation, birthdayThemeReservationAdmin)
