@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>Admin Dashboard</title>
     <style>
         body {
@@ -23,7 +25,7 @@
         }
 
         .container {
-            width: 50%;
+            width: 60%;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -43,7 +45,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -62,7 +65,9 @@
             background-color: #ddd;
         }
 
-        .edit-btn, .delete-btn, .signout-btn {
+        .edit-btn,
+        .delete-btn,
+        .signout-btn {
             padding: 5px 10px;
             border: none;
             cursor: pointer;
@@ -135,10 +140,12 @@
         #main {
             transition: margin-left .5s;
             padding: 20px;
-            margin-left: 250px; /* Offset the main content when the side navigation is open */
+            margin-left: 250px;
+            /* Offset the main content when the side navigation is open */
         }
     </style>
 </head>
+
 <body>
     <!-- Side navigation bar -->
     <div id="mySidenav" class="sidenav">
@@ -154,31 +161,54 @@
     <!-- Page content -->
     <h1 class="Heading">Admin Dashboard</h1>
     <div class="container">
-        <center>
-        <h2>User Registration Details</h2></center>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for data in signup_data %}
-                <tr>
-                    <td>{{ data.username }}</td>
-                    <td>{{ data.email }}</td>
-                    <td>{{ data.first_name }}</td>
-                    <td>{{ data.last_name }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-       
+    <div class="history-container">
+        <section class="history" id="history">
+            <h2 class="section-title">Reservation History</h2>
+            {% if reservations %}
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Number of People</th>
+                        <th>Comments</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.name }}</td>
+                        <td>{{ reservation.phone }}</td>
+                        <td>{{ reservation.date }}</td>
+                        <td>{{ reservation.start_time }}</td>
+                        <td>{{ reservation.end_time }}</td>
+                        <td>{{ reservation.num_people }}</td>
+                        <td>{{ reservation.comments }}</td>
+                        <td>{{ reservation.payment_option }}</td>
+                        <td>{{ reservation.status }}</td>
+                        <td>
+                            <button class="edit-btn"><a href="/edit_admin/{{ reservation.id }}"
+                                    style="text-decoration: none; color: inherit;">EDIT</a></button>
+                            <button class="delete-btn"><a href="/delete_admin/{{ reservation.id }}"
+                                    style="text-decoration: none; color: inherit;">DELETE</a></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4>No previous reservations.</h4>
+            {% endif %}
+        </section>
     </div>
+</div>
+
     <form action="/signin" method="post">
         {% csrf_token %}
         <button class="signout-btn" type="submit">Sign Out</button>
@@ -196,4 +226,5 @@
         }
     </script>
 </body>
+
 </html>

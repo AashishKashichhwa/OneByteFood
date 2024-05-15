@@ -103,5 +103,6 @@ urlpatterns = [
     path('reservation_details/',onebytefood_views.reservationDetails, name='reservation_details'),
     path('update_reservation_user/', onebytefood_views.update_reservation_user, name='update_reservation_user'),
     path('cancel_reservation_user/<int:reservation_id>/', onebytefood_views.cancel_reservation_user, name='cancel_reservation_user'),
-
+    path('admin_dashboard/user_details/', onebytefood_views.user_details, name='user_details'),
+    path('admin_dashboard/reservation_history/', onebytefood_views.reservation_details, name='reservation_details'),
 ]
