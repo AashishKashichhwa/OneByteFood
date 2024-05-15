@@ -354,3 +354,23 @@ def reservationTheme(request):
         return render(request, 'unicorn_data.html', context={'reservations_data': reservations_data}) # Pass the reservations data to the template
 
     return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone}) # Pass the reservations data to the template
+
+from django.shortcuts import render
+from authentication.models import Signup_data
+
+
+def user_details(request):
+    # Fetch user registration details from the database
+    signup_data = Signup_data.objects.all()
+    
+    # Pass the signup_data to the template context
+    return render(request, 'authentication/user_details.html', {'signup_data': signup_data})
+
+from .models import Reservation  # Import the Reservation model
+
+def reservation_details(request):
+    # Retrieve all reservation objects from the database
+    reservations = Reservation.objects.all()
+
+    # Pass the reservations to the template context
+    return render(request, 'authentication/reservation_history.html', {'reservations': reservations})

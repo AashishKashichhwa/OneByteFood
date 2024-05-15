@@ -151,3 +151,4 @@ def user_dashboard(request):
 # def display_users(request):
 #     user_data = User.objects.all()
 #     return render(request, 'admin_dasboard.html', {'user': user_data})
+
