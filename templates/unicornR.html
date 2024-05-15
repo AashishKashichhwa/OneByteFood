@@ -5,58 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Reservation</title>
-    <link rel="stylesheet" href="/static/css/events/unicornR.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <style>
+        body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    width: 100px; /* Adjust width as needed */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="number"],
+.form-group textarea {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: calc(100% - 120px);
+    width: 100%;
+}
+
+.payment-options label {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.continue-button {
+    color: #2c5870;
+}
+
+.continue-button:hover {
+    color: #cf8145;
+}
+
+.photo {
+    flex: 1;
+    padding: 20px;
+}
+
+.photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-box {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group label {
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 10px; 
+}
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+input[type="submit"],
+button[type="reserve"],
+button[type="reset"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #2c5870;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button[type="reserve"]:hover,
+button[type="reset"]:hover {
+    background-color: #cf8145;
+}
+
+.esewa{
+    font-size: 20px;
+}
+    </style>
     <div class="container">
         <div class="photo">
             <img src="/static/Images/event_images/adultbirthdaytheme.jpg" alt="Unicorn Birthday Theme">
         </div>
         <div class="reservation-box">
-            <h2>Reservation Details  <a href="javascript:history.back()" class="continue-button" style="margin-left: 300px;"> 
-                <i class="fas fa-arrow-left"></i></a> </h2>
                 <form method="post" action="{% url 'reservation_theme' %}" id="reservationBirthday" class="reservationForm-form">
                 {% csrf_token %}
                 <fieldset class="fieldset">
-                    <legend>Reservation Information</legend>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="phone">Phone no.:</label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10"
-                        title="Please enter a valid 10-digit phone number" required>
-
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required>
-
-                    <label for="time">Time:</label>
-                    <br>
-                    <br>
-                    <p>Time must be of at least 30 minutes.</p>
-                    <label for="start_time">From: </label>
-                    <input id="start_time" type="time" name="start_time" value="--:--" />
-
-                    <label for="end_time">To: </label>
-                    <input id="end_time" type="time" name="end_time" value="--:--" />
-
-                    <label for="people">No. of people:</label>
-                    <input type="number" id="people" name="people" min="1" max="10" required>
-
-                    <label for="needs">Comments:</label>
-                    <textarea id="needs" name="needs"></textarea>
-
-                    <div class="payment">
-                        <label for="payment">Payment Made:</label>
-                        <div class="payment-options">
-                            <label>
-                                <input type="checkbox" id="payment_made" name="payment_made">
-                            </label>
-                        </div>
+                    <legend class="head">Reservation Information <a href="javascript:history.back()" class="continue-button" style="margin-left: 200px;"> 
+                        <i class="fas fa-arrow-left"></i></a></legend>
+                    <div class="form-group">
+                        <label for="name" style="margin-top: 20px; font-size: 18px; font-weight: bold;">Name:</label>
+                        <input type="text" style="margin-top: 20px;" id="name" name="name" required>
                     </div>
 
-                    <a href="unicorn_data"><button type="reserve" class="reserve-btn">Reserve</button></a>
-                    <button type="reset" class="reset-btn">Reset</button>
+                    <div class="form-group">
+                        <label for="phone" style="font-size: 18px; font-weight: bold;">Phone no.:</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date" style=" font-size: 18px; font-weight: bold;">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start_time" style="font-size: 18px; font-weight: bold;">Start Time:</label>
+                        <input id="start_time" type="time" name="start_time" value="--:--" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end_time" style="font-size: 18px; font-weight: bold;">End Time:</label>
+                        <input id="end_time" type="time" name="end_time" value="--:--" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="people" style="font-size: 18px; font-weight: bold;">No. of people:</label>
+                        <input type="number" id="people" name="people" min="1" max="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="needs" style="font-size: 18px; font-weight: bold;">Comments:</label>
+                        <textarea id="needs" name="needs"></textarea>
+                    </div>
+                    <div class="form-group payment-options">
+                        <label for="payment" style="font-size: 18px; font-weight: bold;">Payment Made:</label>
+                        <label>
+                            <input type="checkbox" id="payment_made" name="payment_made" class="esewa"> 
+                        </label>
+                    </div>
+
+                    <a href="unicorn_data"><button type="reserve" class="reserve-btn" style="font-weight: bold;">Submit Reservation</button></a>
                 </fieldset>
                 {% csrf_token %}
             </form>

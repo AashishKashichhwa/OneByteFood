@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .Heading {
+            text-align: center;
+            font-size: 32px;
+            color: #32657C;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #669BB7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #32657C;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .edit-btn, .delete-btn, .signout-btn {
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: Montserrat, sans-serif;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background-color: #EEC343;
+            color: #fff;
+        }
+
+        .delete-btn {
+            background-color: #CF8145;
+            color: #fff;
+        }
+
+        .signout-btn {
+            background-color: #669BB7;
+            color: #fff;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        .signout-btn:hover {
+            background-color: #32657C;
+        }
+
+        /* Side navigation menu */
+        .sidenav {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #32657C;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
+
+        /* Navigation menu links */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #ffffff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Hover effect for navigation links */
+        .sidenav a:hover {
+            color: #000000;
+        }
+
+        /* Close button style */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Page content */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+            margin-left: 250px; /* Offset the main content when the side navigation is open */
+        }
+    
+        .Back-Btn {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #2c5870, #669bb7);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .history-container {
+            margin-top: 50px;
+            padding-bottom: 200px;
+        }
+
+        .history-table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #1e1d1d;
+        }
+
+        .history-table th,
+        .history-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background-color: #32657C;
+            color: #FFF;
+        }
+
+        .edit-btn,
+        .cancel-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #32657C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover,
+        .cancel-btn:hover {
+            background-color: #234555;
+        }
+
+        .cancel-btn {
+            background-color: #C0392B;
+        }
+
+        .no-reservations {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="http://127.0.0.1:8000/admin_dashboard/user_details/">User Registration Details</a>
+        <a href="http://127.0.0.1:8000/admin_dashboard/reservation_history/">Reservation History</a>
+        <a href="#">Cart Details</a>
+        <a href="http://127.0.0.1:8000/admin_dashboard/unicorn_reservation_data">Events Reservation Details</a>
+    </div>
+    <!-- Reservation History -->
+    <div class="history-container">
+        <section class="history" id="history">
+            <h2 class="section-title">Reservation History</h2>
+            {% if reservations_data %}
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Number of People</th>
+                        <th>Comments</th>
+                        <th>Payment Made</th>
+                        <th>Status</th>
+                        <th>Theme</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Add rows for each reservation -->
+                    {% for reservation in reservations_data %}
+                    <tr>
+                        <td>{{ reservation.name }}</td>
+                        <td>{{ reservation.phone }}</td>
+                        <td>{{ reservation.date }}</td>
+                        <td>{{ reservation.start_time }}</td>
+                        <td>{{ reservation.end_time }}</td>
+                        <td>{{ reservation.num_people }}</td>
+                        <td>{{ reservation.comments }}</td>
+                        <td>{% if reservation.payment_made %}Yes{% else %}No{% endif %}</td>
+                        <td>{{ reservation.status }}</td>
+                        <td>{{ reservation.theme }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 class="validation">No previous reservations.</h4>
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>
