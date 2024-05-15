@@ -58,6 +58,7 @@
 from django.urls import path
 from OneByteFood import views as onebytefood_views
 from authentication import views as auth_views
+from .views import delete_item
 
 urlpatterns = [
     path('', onebytefood_views.index, name='index'),  # Homepage
@@ -105,4 +106,7 @@ urlpatterns = [
     path('cancel_reservation_user/<int:reservation_id>/', onebytefood_views.cancel_reservation_user, name='cancel_reservation_user'),
     path('admin_dashboard/user_details/', onebytefood_views.user_details, name='user_details'),
     path('admin_dashboard/reservation_history/', onebytefood_views.reservation_details, name='reservation_details'),
+    path('checkout/', onebytefood_views.checkout, name='checkout'),
+    path('delete_item', delete_item, name='delete_item'),
+    path('cartcopy/', onebytefood_views.cartcopy, name='cartcopy'),
 ]

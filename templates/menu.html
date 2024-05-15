@@ -50,9 +50,9 @@
             </div>
             <p>{{ food_item.description }}</p>
             <div class="quantity-controls">
-                <button class="quantity-btn decrease" id="decreaseBtn{{ food_item.id }}">-</button>
+                <button class="quantity-btn decrease" id="decreaseBtn{{ food_item.id }}" onclick="decreaseQuantity('{{ food_item.id }}')">-</button>
                 <span class="quantity" id="quantity{{ food_item.id }}">1</span>
-                <button class="quantity-btn increase" id="increaseBtn{{ food_item.id }}">+</button>
+                <button class="quantity-btn increase" id="increaseBtn{{ food_item.id }}" onclick="increaseQuantity('{{ food_item.id }}')">+</button>
             </div>
             <form method="post" action="{% url 'add_to_cart' %}">
                 {% csrf_token %}
@@ -67,11 +67,11 @@
 
 
     <!--Footer-->
-    <footer style="background-image: url('footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
+    <footer style="background-image: url('/static/Images/Footer.png'); background-size: cover; background-position: center; background-repeat: no-repeat; color: white;">
         <div class="containerfooter">
             <div class="footer-section">
                 <div class="logo-section">
-                    <img src="/static/Images/logo.png" alt="OneByte Foods Logo">
+                    <img src="/static/Images/Logo.png" alt="OneByte Foods Logo">
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>

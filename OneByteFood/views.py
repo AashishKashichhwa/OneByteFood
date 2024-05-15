@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
-from .models import Reservation
+from .models import Reservation, FoodItem
+from django.http import JsonResponse
+import json
 # from OneByteFood.models import Reservation
 
 def index(request):
@@ -260,12 +262,14 @@ def cart(request):
 def add_to_cart(request):
     if request.method == 'POST':
         food_item_id = request.POST.get('food_item_id')
-        quantity = request.POST.get('quantity')
-        # Assuming you have a FoodItem model with id, name, price, etc.
+        quantity = int(request.POST.get('quantity', 1))  # Default to 1 if quantity is not provided
         food_item = FoodItem.objects.get(pk=food_item_id)
-        total_price = food_item.price * int(quantity)
+        total_price = food_item.price * quantity
+
         # Create a CartItem object and save it to the database
         cart_item = CartItem.objects.create(
+            name=food_item.name,
+            image_url=food_item.image_url,
             food_item=food_item,
             quantity=quantity,
             price=total_price  # Calculate price based on quantity
@@ -278,8 +282,20 @@ def cart_view(request):
     cart_items = CartItem.objects.all()
     total_items = cart_items.count()
     total_price = sum(item.price for item in cart_items)
+    detail_list = []
+    for detail in cart_items:
+        detail_dict = {
+            'id' : detail.id,
+            'user' : detail.user, 
+            'name' : detail.name,
+            'image_url' : detail.image_url, 
+            'food_item' : detail.food_item,
+            'quantity' : detail.quantity,
+            'price' : detail.price
+        }
+        detail_list.append(detail_dict)
     context = {
-        'cart_items': cart_items,
+        'cart_items': detail_list,
         'total_items': total_items,
         'total_price': total_price
     }
@@ -303,6 +319,9 @@ def babybirthday(request):
     # Your baby birthday view logic here
     return render(request, 'babybirthday.html')
 
+def cartcopy(request):
+    # Your baby birthday view logic here
+    return render(request, 'cartcopy.html')
 
 
 from django.shortcuts import render
@@ -374,3 +393,60 @@ def reservation_details(request):
 
     # Pass the reservations to the template context
     return render(request, 'authentication/reservation_history.html', {'reservations': reservations})
+
+from django.shortcuts import render, redirect
+from .models import Order
+
+def checkout(request):
+    if request.method == 'POST':
+        # Get the checkout details from the form
+        name = request.POST.get('name')
+        place = request.POST.get('place')
+        phone = request.POST.get('phone')
+        total_items = request.POST.get('total_items')
+        total_price = request.POST.get('total_price')
+        
+        # Get the cart item details from the form
+        item_names = request.POST.getlist('item_names[]')
+        item_prices = request.POST.getlist('item_prices[]')
+        item_quantities = request.POST.getlist('item_quantities[]')
+        
+        # Save the checkout details to the database
+        order = Order.objects.create(
+            name=name,
+            place=place,
+            phone=phone,
+            total_items=total_items,
+            total_price=total_price
+        )
+        
+        # Save each cart item to the database
+        for i in range(len(item_names)):
+            order.items.create(
+                name=item_names[i],
+                price=item_prices[i],
+                quantity=item_quantities[i]
+            )
+        
+        # Clear cart session data
+        if 'cart_items' in request.session:
+            del request.session['cart_items']
+        
+        # Redirect to the menu page after successful checkout
+        return redirect('http://127.0.0.1:8000/menu')
+
+    return render(request, 'checkout.html')
+
+
+def delete_item(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        item_id = data['id']
+        try:
+            item = CartItem.objects.get(id=item_id)
+            item.delete()
+            return JsonResponse({'message': 'Item deleted successfully'}, status=200)
+        except CartItem.DoesNotExist:
+            return JsonResponse({'error': 'Item not found'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
