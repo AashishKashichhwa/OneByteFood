@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Reservation</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>Admin Dashboard</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
         body {
             font-family: Montserrat, sans-serif;
             margin: 0;
@@ -30,7 +25,7 @@
         }
 
         .container {
-            width: 50%;
+            width: 60%;
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
@@ -50,7 +45,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -69,7 +65,9 @@
             background-color: #ddd;
         }
 
-        .edit-btn, .delete-btn, .signout-btn {
+        .edit-btn,
+        .delete-btn,
+        .signout-btn {
             padding: 5px 10px;
             border: none;
             cursor: pointer;
@@ -142,88 +140,28 @@
         #main {
             transition: margin-left .5s;
             padding: 20px;
-            margin-left: 250px; /* Offset the main content when the side navigation is open */
-        }
-    
-        .Back-Btn {
-            padding: 10px 20px;
-            background: linear-gradient(to right, #2c5870, #669bb7);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            text-decoration: none;
-            cursor: pointer;
-            margin-top: 15px;
-            margin-left: 15px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .history-container {
-            margin-top: 50px;
-            padding-bottom: 200px;
-        }
-
-        .history-table {
-            border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #1e1d1d;
-        }
-
-        .history-table th,
-        .history-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .history-table th {
-            background-color: #32657C;
-            color: #FFF;
-        }
-
-        .edit-btn,
-        .cancel-btn {
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #32657C;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .edit-btn:hover,
-        .cancel-btn:hover {
-            background-color: #234555;
-        }
-
-        .cancel-btn {
-            background-color: #C0392B;
-        }
-
-        .no-reservations {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 1.2rem;
-            color: #333;
+            margin-left: 250px;
+            /* Offset the main content when the side navigation is open */
         }
     </style>
 </head>
+
 <body>
+    <!-- Side navigation bar -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="http://127.0.0.1:8000/admin_dashboard/user_details/">User Registration Details</a>
         <a href="http://127.0.0.1:8000/admin_dashboard/reservation_history/">Reservation History</a>
-        <a href="#">Cart Details</a>
+        <a href="http://127.0.0.1:8000/admin_dashboard/cart">Cart Details</a>
         <a href="http://127.0.0.1:8000/admin_dashboard/unicorn_reservation_data">Events Reservation Details</a>
     </div>
-    <!-- Reservation History -->
-    <div class="history-container">
+
+    <!-- Button to open side navigation -->
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Open</span>
+
+    <!-- Page content -->
+    <h1 class="Heading">Admin Dashboard</h1>
+    <div class="container">
         <section class="history" id="history">
             <h2 class="section-title">Reservation History</h2>
             {% if reservations_data %}
@@ -266,5 +204,24 @@
             {% endif %}
         </section>
     </div>
+</div>
+
+    <form action="/signin" method="post">
+        {% csrf_token %}
+        <button class="signout-btn" type="submit">Sign Out</button>
+    </form>
+    </div>
+
+    <!-- JavaScript to toggle side navigation -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
+
 </html>

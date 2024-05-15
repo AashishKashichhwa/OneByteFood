@@ -404,48 +404,62 @@ def reservationAdminTheme(request):
 
     return render(request, 'authentication/unicorn_reservation_data.html', context={'reservations_data': reservations_data})
 
+# views.py
+# views.py
 from django.shortcuts import render, redirect
-from .models import Order
+from .models import Order, Item
 
 def checkout(request):
     if request.method == 'POST':
-        # Get the checkout details from the form
-        name = request.POST.get('name')
-        place = request.POST.get('place')
-        phone = request.POST.get('phone')
-        total_items = request.POST.get('total_items')
-        total_price = request.POST.get('total_price')
-        
-        # Get the cart item details from the form
-        item_names = request.POST.getlist('item_names[]')
-        item_prices = request.POST.getlist('item_prices[]')
-        item_quantities = request.POST.getlist('item_quantities[]')
-        
-        # Save the checkout details to the database
-        order = Order.objects.create(
-            name=name,
-            place=place,
-            phone=phone,
-            total_items=total_items,
-            total_price=total_price
-        )
-        
-        # Save each cart item to the database
-        for i in range(len(item_names)):
-            order.items.create(
-                name=item_names[i],
-                price=item_prices[i],
-                quantity=item_quantities[i]
+        try:
+            # Get the checkout details from the form
+            name = request.POST.get('name')
+            place = request.POST.get('place')
+            phone = request.POST.get('phone')
+            total_items = request.POST.get('total_items')
+            total_price = request.POST.get('total_price')
+
+            # Get the cart item details from the form
+            item_names = request.POST.getlist('item_names[]')
+            item_prices = request.POST.getlist('item_prices[]')
+            item_quantities = request.POST.getlist('item_quantities[]')
+
+            # Validate that we have all the item details
+            if not (item_names and item_prices and item_quantities and len(item_names) == len(item_prices) == len(item_quantities)):
+                return render(request, 'checkout.html', {'error': 'Incomplete item details'})
+
+            # Create Order
+            order = Order.objects.create(
+                name=name,
+                place=place,
+                phone=phone,
+                total_items=total_items,
+                total_price=total_price
             )
-        
-        # Clear cart session data
-        if 'cart_items' in request.session:
-            del request.session['cart_items']
-        
-        # Redirect to the menu page after successful checkout
-        return redirect('http://127.0.0.1:8000/menu')
+
+            # Create Items
+            for i in range(len(item_names)):
+                Item.objects.create(
+                    order=order,
+                    name=item_names[i],
+                    price=item_prices[i],
+                    quantity=item_quantities[i]
+                )
+
+            # Clear cart session data
+            if 'cart_items' in request.session:
+                del request.session['cart_items']
+
+            # Redirect to the menu page after successful checkout
+            return redirect('menu')
+
+        except Exception as e:
+            print(f"Error during checkout: {e}")
+            return render(request, 'checkout.html', {'error': str(e)})
 
     return render(request, 'checkout.html')
+
+
 
 
 def delete_item(request):
@@ -460,3 +474,10 @@ def delete_item(request):
             return JsonResponse({'error': 'Item not found'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+from django.shortcuts import render
+from .models import Order
+
+def cart_details(request):
+    orders = Order.objects.all()
+    return render(request, 'authentication/cart_details.html', {'orders': orders})
