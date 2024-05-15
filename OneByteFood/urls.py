@@ -109,4 +109,5 @@ urlpatterns = [
     path('checkout/', onebytefood_views.checkout, name='checkout'),
     path('delete_item', delete_item, name='delete_item'),
     path('cartcopy/', onebytefood_views.cartcopy, name='cartcopy'),
+    path('admin_dashboard/unicorn_reservation_data', onebytefood_views.reservationAdminTheme, name='admin_reservation_details'),
 ]

@@ -394,6 +394,16 @@ def reservation_details(request):
     # Pass the reservations to the template context
     return render(request, 'authentication/reservation_history.html', {'reservations': reservations})
 
+
+from django.shortcuts import render
+from .models import birthday_theme_reservation
+
+def reservationAdminTheme(request): 
+    # Retrieve all reservations data
+    reservations_data = birthday_theme_reservation.objects.all()
+
+    return render(request, 'authentication/unicorn_reservation_data.html', context={'reservations_data': reservations_data})
+
 from django.shortcuts import render, redirect
 from .models import Order
 
