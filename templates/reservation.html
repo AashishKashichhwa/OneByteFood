@@ -55,7 +55,8 @@
                     <label for="time">Time:</label>
                     <br>
                     <br>
-                    <p>Time must be of at least 30 minutes.</p>
+                    <span id="error-message" style="color: red; font-size: 10px;"></span> 
+                    <br>
                     <label for="start_time">From: </label>
                     <input id="start_time" type="time" name="start_time" value="--:--" />
 
@@ -175,48 +176,49 @@
 
     <!-- JavaScript -->
     <script>
-        const form = document.getElementById('reservation-form');
-
+        const form = document.getElementById('reservationForm');
+        const startTimeInput = document.getElementById('start_time');
+        const endTimeInput = document.getElementById('end_time');
+    
         // Get today's date
         const today = new Date();
         const year = today.getFullYear();
         const month = (today.getMonth() + 1).toString().padStart(2, '0'); // Month starts from 0
         const day = today.getDate().toString().padStart(2, '0');
         const minDate = `${year}-${month}-${day}`;
-
+    
         // Set the minimum date for the date input field
         document.getElementById('date').min = minDate;
-
+    
         // Add event listener for form submission
-        form.addEventListener('reserve', (event) => {
+        form.addEventListener('submit', function (event) {
             const selectedDate = new Date(document.getElementById('date').value);
-
+            const errorContainer = document.getElementById('error-message');
+    
             if (selectedDate < today) {
-                alert('Please select a date equal to or after today.');
+                errorContainer.textContent = 'Please select a date equal to or after today.';
+                errorContainer.style.color = 'red';
                 event.preventDefault(); // Prevent form submission
+            } else {
+                errorContainer.textContent = ''; // Clear previous error message
             }
-
-            const comments = document.getElementById('comments').value.trim();
-            // Check if comments are empty
-            if (!comments) {
-                const confirmEmptyComments = confirm('Are you sure you want to leave the comments empty?');
-                if (!confirmEmptyComments) {
-                    event.preventDefault(); // Prevent form submission
-                }
-            }
-
-            const phoneNumber = document.getElementById('phone').value.trim();
-            // Check if phone number is 10 digits starting with 98
-            if (!/^(98)\d{8}$/.test(phoneNumber)) {
-                alert('Please enter a valid 10-digit phone number starting with 98.');
+    
+            const startTime = new Date(`2000-01-01T${startTimeInput.value}`);
+            const endTime = new Date(`2000-01-01T${endTimeInput.value}`);
+            const timeDiffInMinutes = (endTime - startTime) / (1000 * 60);
+    
+            if (timeDiffInMinutes < 30) {
+                errorContainer.textContent = '* The reservation time must be at least 30 minutes.';
+                errorContainer.style.color = 'red';
                 event.preventDefault(); // Prevent form submission
+            } else {
+                errorContainer.textContent = ''; // Clear previous error message
             }
         });
-
-
+    
         // Function to clear the form
         function clearForm() {
-            document.getElementById('reservation-form').reset();
+            document.getElementById('reservationForm').reset();
         }
     </script>
 
