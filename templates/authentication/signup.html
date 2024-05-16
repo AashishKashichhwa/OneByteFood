@@ -32,58 +32,47 @@
 </head>
 <body>
     <div id="all">
-
         <div class="background-container">
             <img src="/static/img/rest.jpg" alt="Background Image">
         </div>
-            <div class="container">
-                <h3>Create your account!</h3>
-                <form method="post" action="/signup">
-                    {% csrf_token %}
-
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control-username" id="username" name="username" placeholder="Create A Username" required>
-                        
-                        <label for="fname">First Name</label>
-                        <input type="text" class="form-control-first" id="fname" name="fname" placeholder="Enter Your First Name" required>
-                
-                        <label for="lname">Last Name</label>
-                        <input type="text" class="form-control-last" id="lname" name="lname" placeholder="Enter Your Last Name" required>
-                
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control-email" id="email" name="email" placeholder="Enter Your Email Address" required>
-                
-                        <label for="pass1">Password</label>
-                        <div class="input-group">
-                            
-                            <input type="password" class="form-control-password" id="pass1" name="pass1" placeholder="Create Your Password" required>
-                            <div class="input-group-append">
+        <div class="container">
+            <!-- Cross button to redirect to index.html -->
+            <a href="/"><i class="fas fa-times-circle"></i></a>
+            <h3>Create your account!</h3>
+            <form method="post" action="/signup">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control-username" id="username" name="username" placeholder="Create A Username" required>
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control-first" id="fname" name="fname" placeholder="Enter Your First Name" required>
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control-last" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control-email" id="email" name="email" placeholder="Enter Your Email Address" required>
+                    <label for="pass1">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control-password" id="pass1" name="pass1" placeholder="Create Your Password" required>
+                        <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button"  onclick="togglePassword('pass1', 'password-icon1')" title="Show Password">
                                 <i id="password-icon1" class="fas fa-eye"></i>
                             </button>
                         </div>
-                        </div>
-        
-                        <label for="pass2">Confirm Password</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control-password" id="pass2" name="pass2" placeholder="Confirm Your Password" required>
-                            <div class="input-group-append">
+                    </div>
+                    <label for="pass2">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control-password" id="pass2" name="pass2" placeholder="Confirm Your Password" required>
+                        <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button"  onclick="togglePassword('pass2', 'password-icon2')" title="Show Password">
                                 <i id="password-icon2" class="fas fa-eye"></i>
                             </button>
                         </div>
-                        </div>
                     </div>
-                
-
+                </div>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
                 <a href="{% url 'signin' %}">Already have an account?</a>
-
             </form>
         </div>
-    
     </div>
-        
 </body>
 </html>
