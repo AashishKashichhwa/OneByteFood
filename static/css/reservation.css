@@ -5,13 +5,13 @@
     font-family: 'Montserrat', sans-serif;
 
 }
-
 nav {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: 800;
+    background-color: #eaeaea;
+    z-index: 800; 
     font-weight: 600;
 }
 
@@ -23,43 +23,25 @@ nav {
 }
 
 .logo img {
-    width: 200px;
-    height: auto;
+    width: 200px; 
+    height: auto; 
 }
 
 .login-button {
     display: inline-block;
-    padding: 10px 20px;
-    background: linear-gradient(to right, #2c5870, #669bb7);
-    color: #fff;
+    padding: 10px 20px; 
+    background: linear-gradient(to right, #2c5870, #669bb7); 
+    color: #fff; 
     border: none;
-    border-radius: 20px;
-    text-decoration: none;
+    border-radius: 20px; 
+    text-decoration: none; 
     cursor: pointer;
     margin-left: 150px;
 }
-
-.fieldset {
-    display: block;
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
-    padding-block-start: 0.35em;
-    padding-inline-start: 0.75em;
-    padding-inline-end: 0.75em;
-    padding-block-end: 0.625em;
-    min-inline-size: min-content;
-    border-width: 2px;
-    border-style: groove;
-    border-color: rgb(192, 192, 192);
-    border-image: initial;
-
-}
-
 .login-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 3px rgba(30, 62, 81, 0.8)
+    transform: translateY(-3px); 
+    box-shadow: 0px 6px 3px rgba(30, 62, 81, 0.8) 
 }
-
 .menu ul {
     list-style-type: none;
     text-align: right;
