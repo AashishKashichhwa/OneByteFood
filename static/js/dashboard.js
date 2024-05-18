@@ -4,14 +4,16 @@ const closeButton = document.querySelector('.close');
 const navBar = document.querySelector('nav');
 
 function showPopup() {
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-    popup.style.display = 'block';
+    overlay.style.display = 'block'; // Show the overlay
+    popup.style.display = 'block'; // Show the popup
+    navBar.classList.add('nav-disabled'); // Disable nav bar
     navBar.style.backgroundColor = 'rgba(255, 255, 255, 0.3)'; 
 }
 
 function hidePopup() {
-    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-    popup.style.display = 'none';
+    overlay.style.display = 'none'; // Hide the overlay
+    popup.style.display = 'none'; // Hide the popup
+    navBar.classList.remove('nav-disabled'); // Enable nav bar
     navBar.style.backgroundColor = 'rgba(255, 255, 255, 0.9)'; 
 }
 
@@ -19,6 +21,4 @@ closeButton.addEventListener('click', hidePopup);
 
 window.onload = function() {
     setTimeout(showPopup, 1000);
-
-    closeButton.addEventListener('click', hidePopup);
 }

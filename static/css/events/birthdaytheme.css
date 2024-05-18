@@ -9,11 +9,11 @@ body {
     background: #ffffff;
 }
 nav {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #eaeaea;
     z-index: 800; 
     font-weight: 600;
 }
@@ -33,20 +33,18 @@ nav {
 .login-button {
     display: inline-block;
     padding: 10px 20px; 
-    background: linear-gradient(to right, #2c5870, #669bb7); /* Linear gradient background */
+    background: linear-gradient(to right, #2c5870, #669bb7); 
     color: #fff; 
     border: none;
     border-radius: 20px; 
     text-decoration: none; 
     cursor: pointer;
-    margin-left: 180px;
+    margin-left: 150px;
 }
-
-.login-button:active {
+.login-button:hover {
     transform: translateY(-3px); 
-    }
-
-
+    box-shadow: 0px 6px 3px rgba(30, 62, 81, 0.8) 
+}
 .menu ul {
     list-style-type: none;
     text-align: right;
@@ -64,20 +62,7 @@ nav {
 }
 
 .menu ul li a:hover {
-    color: #CF8145;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #e1dfdf;
-    min-width: 190px;
-    z-index: 1;
+    color: #cf8145;
 }
 
 .empty{
