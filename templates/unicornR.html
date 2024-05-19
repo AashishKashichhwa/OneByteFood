@@ -7,6 +7,32 @@
     <title>Reservation</title>
     <link rel="stylesheet" href="/static/css/events/unicorn.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Disable past dates
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("date").setAttribute('min', today);
+
+            // Validate end time
+            document.getElementById("end_time").addEventListener("change", function() {
+                const startTime = document.getElementById("start_time").value;
+                const endTime = this.value;
+                if (endTime && endTime <= startTime) {
+                    alert("End time must be after start time.");
+                    this.value = "";
+                }
+            });
+
+            // Validate end time when start time changes
+            document.getElementById("start_time").addEventListener("change", function() {
+                const endTime = document.getElementById("end_time").value;
+                if (endTime && endTime <= this.value) {
+                    alert("End time must be after start time.");
+                    document.getElementById("end_time").value = "";
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -15,11 +41,14 @@
             <img src="/static/Images/event_images/adultbirthdaytheme.jpg" alt="Unicorn Birthday Theme">
         </div>
         <div class="reservation-box">
-                <form method="post" action="{% url 'reservation_theme' %}" id="reservationBirthday" class="reservationForm-form">
+            <form method="post" action="{% url 'reservation_theme' %}" id="reservationBirthday" class="reservationForm-form">
                 {% csrf_token %}
                 <fieldset class="fieldset">
-                    <legend class="head" style="margin-left: -3px; font-size: 24px;">Reservation Information <a href="javascript:history.back()" class="continue-button" style="margin-left: 250px;"> 
-                        <i class="fas fa-arrow-left"></i></a></legend>
+                    <legend class="head" style="margin-left: -3px; font-size: 24px;">Reservation Information 
+                        <a href="javascript:history.back()" class="continue-button" style="margin-left: 250px;">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </legend>
                     <div class="form-group">
                         <label for="name" style="margin-top: 20px; font-size: 18px; font-weight: bold;">Name:</label>
                         <input type="text" style="margin-top: 20px;" id="name" name="name" required>
@@ -37,11 +66,11 @@
 
                     <div class="form-group">
                         <label for="start_time" style="font-size: 18px; font-weight: bold;">Start Time:</label>
-                        <input id="start_time" type="time" name="start_time" value="--:--" required>
+                        <input id="start_time" type="time" name="start_time" required>
                     </div>
                     <div class="form-group">
                         <label for="end_time" style="font-size: 18px; font-weight: bold;">End Time:</label>
-                        <input id="end_time" type="time" name="end_time" value="--:--" required>
+                        <input id="end_time" type="time" name="end_time" required>
                     </div>
 
                     <div class="form-group">
@@ -63,8 +92,8 @@
 
                     <a href="unicorn_data"><button type="reserve" class="reserve-btn" style="font-weight: bold;">Submit Reservation</button></a>
                 </fieldset>
-                {% csrf_token %}
             </form>
+
         </div>
     </div>
 </body>

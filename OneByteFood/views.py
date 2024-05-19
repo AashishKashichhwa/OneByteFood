@@ -323,8 +323,10 @@ def cartcopy(request):
     # Your baby birthday view logic here
     return render(request, 'cartcopy.html')
 
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.utils import timezone
+from datetime import datetime, time
 from .models import birthday_theme_reservation  # Importing the model
 
 def reservationTheme(request):
@@ -353,13 +355,39 @@ def reservationTheme(request):
         status = 'pending'
         theme = 'unicorn'
 
+        # Convert date and time to datetime objects
+        try:
+            date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+            start_time_obj = datetime.strptime(start_time, '%H:%M').time()
+            end_time_obj = datetime.strptime(end_time, '%H:%M').time()
+        except ValueError:
+            messages.error(request, 'Invalid date or time format.')
+            return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone})
+
+        # Combine date and time into datetime for comparison
+        start_datetime = datetime.combine(date_obj, start_time_obj)
+        end_datetime = datetime.combine(date_obj, end_time_obj)
+
+        # Debugging statements
+        print(f"Date: {date_obj}, Start Time: {start_time_obj}, End Time: {end_time_obj}")
+
+        # Check if the date is in the past
+        if date_obj < timezone.now().date():
+            messages.error(request, 'Cannot reserve a past date.')
+            return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone})
+
+        # Check if the end time is before the start time
+        if end_datetime <= start_datetime:
+            messages.error(request, 'End time must be after start time.')
+            return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone})
+
         # Create the reservation object
         reservation = birthday_theme_reservation(
             name=name,
             phone=phone,
-            date=date,
-            start_time=start_time,
-            end_time=end_time,
+            date=date_obj,
+            start_time=start_time_obj,
+            end_time=end_time_obj,
             num_people=num_people,
             comments=comments,
             payment_made=payment_made,
@@ -367,12 +395,12 @@ def reservationTheme(request):
         )
         reservation.save()
 
-        messages.success(request, 'Reservation is requested successfully. Wait admin to verify the reservation status')
+        messages.success(request, 'Reservation is requested successfully. Wait for admin to verify the reservation status.')
 
-        # Redirect to the same page after form submission
-        return render(request, 'unicorn_data.html', context={'reservations_data': reservations_data}) # Pass the reservations data to the template
+        # Redirect to unicorn_data.html after successful reservation
+        return render(request, 'unicorn_data.html', context={'reservations_data': reservations_data})
 
-    return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone}) # Pass the reservations data to the template
+    return render(request, 'unicornR.html', context={'reservations_data': reservations_data, 'name': name, 'phone': phone})
 
 from django.shortcuts import render
 from authentication.models import Signup_data
